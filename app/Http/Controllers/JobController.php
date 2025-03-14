@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Designation;
 use App\Models\JobType;
 use App\Models\Skill;
+use App\Models\Education;
 use App\Models\JobInfo;
 use Illuminate\Support\Facades\Crypt;
 
@@ -56,8 +57,9 @@ class JobController extends Controller
         $designations = Designation::all();
         $jobTypes = JobType::all();
         $skills = Skill::all();
+        $educations = Education::all();
     
-        return view('admin.jobs.create', compact('categories', 'designations', 'jobTypes', 'skills'));
+        return view('admin.jobs.create', compact('categories', 'designations', 'jobTypes', 'skills','educations'));
     }
     
 

@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>
-<!-- ======================= End Page Title ===================== --> 
+<!-- ======================= End Page Title ===================== -->
 
 <section class="padd-top-80 padd-bot-60">
   <div class="container">
@@ -23,18 +23,20 @@
               <div class="col-md-4 text-center user_profile_img">
                 <img src="{{ asset($job->company_logo ?? 'assets/img/company_logo_1.png') }}" class="width-100" alt="">
                 <h4 class="meg-0">{{ $job->title }}</h4>
-                <span>{{ $job->company_address }}</span> 
+                <span>{{ $job->location }}</span>
                 <div class="text-center">
-                  <button type="button" data-toggle="modal" data-target="#signin" class="btn-job theme-btn job-apply">Apply Now</button>
+                  <button type="button" onclick="applyNow('{{ $job->apply_via }}', '{{ $job->job_contact_email }}', '{{ $job->job_contact_no }}', '{{ $job->company_website }}')" class="btn-job theme-btn job-apply">Apply Now</button>
                 </div>
               </div>
               <div class="col-md-8 user_job_detail">
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-credit-card padd-r-10"></i>{{ $job->salary }} </div>
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-mobile padd-r-10"></i>{{ $job->contact_number }}</div>
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-email padd-r-10"></i>{{ $job->contact_email }}</div>
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-calendar padd-r-10"></i><span class="full-type">{{ ucfirst($job->job_type) }}</span></div>
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-user padd-r-10"></i><span class="cl-danger">{{ $job->open_positions }} Open Positions</span></div>
-                <div class="col-sm-12 mrg-bot-10"> <i class="ti-shield padd-r-10"></i>{{ $job->experience }} Year(s) Exp. </div>
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-credit-card padd-r-10"></i> {{ $job->min_salary }} - {{ $job->max_salary }} /Month</div>
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-calendar padd-r-10"></i><span class="full-type">{{ ucfirst(optional($job->jobType)->title) }}</span></div>
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-user padd-r-10"></i><span class="cl-danger">{{ $job->no_of_position }} Open Positions</span></div>
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-shield padd-r-10"></i>{{ $job->min_experience }} - {{ $job->max_experience }} Year(s) Exp.</div>
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-email padd-r-10"></i>{{ $job->job_contact_email }}</div>
+                @if($job->job_contact_no)
+                <div class="col-sm-12 mrg-bot-10"> <i class="ti-mobile padd-r-10"></i>{{ $job->job_contact_no }}</div>
+                @endif
               </div>
             </div>
           </div>
@@ -45,18 +47,18 @@
             <h4>Job Description</h4>
           </div>
           <div class="detail-wrapper-body">
-            <p>{{ $job->description }}</p>
+            <p>{{ $job->job_description }}</p>
           </div>
         </div>
 
         <div class="detail-wrapper">
           <div class="detail-wrapper-header">
-            <h4>Job Skills</h4>
+            <h4>Requirements</h4>
           </div>
           <div class="detail-wrapper-body">
             <ul class="detail-list">
-              @foreach(explode(',', $job->skills) as $skill)
-                <li>{{ trim($skill) }}</li>
+              @foreach(explode("\n", $job->job_requirement) as $requirement)
+                <li>{{ trim($requirement) }}</li>
               @endforeach
             </ul>
           </div>
@@ -70,24 +72,11 @@
             <iframe src="https://www.google.com/maps?q={{ urlencode($job->location) }}&output=embed" width="100%" height="320" frameborder="0" style="border:0" allowfullscreen=""></iframe>
           </div>
         </div>
-
-        <div class="detail-wrapper">
-          <div class="detail-wrapper-header">
-            <h4>Requirements</h4>
-          </div>
-          <div class="detail-wrapper-body">
-            <ul class="detail-list">
-              @foreach(explode("\n", $job->requirements) as $requirement)
-                <li>{{ trim($requirement) }}</li>
-              @endforeach
-            </ul>
-          </div>
-        </div>
       </div>
 
       <!-- Sidebar -->
       <div class="col-md-4 col-sm-5">
-        <div class="sidebar"> 
+        <div class="sidebar">
           <div class="widget-boxed">
             <div class="widget-boxed-header">
               <h4><i class="ti-location-pin padd-r-10"></i>Job Overview</h4>
@@ -95,13 +84,14 @@
             <div class="widget-boxed-body">
               <div class="side-list no-border">
                 <ul>
-                  <li><i class="ti-credit-card padd-r-10"></i>Package: {{ $job->salary }}</li>
-                  <li><i class="ti-world padd-r-10"></i><a href="{{ $job->company_website }}" target="_blank">{{ $job->company_website }}</a></li>
-                  <li><i class="ti-mobile padd-r-10"></i>{{ $job->contact_number }}</li>
-                  <li><i class="ti-email padd-r-10"></i>{{ $job->contact_email }}</li>
-                  <li><i class="ti-pencil-alt padd-r-10"></i>{{ $job->education }}</li>
-                  <li><i class="ti-shield padd-r-10"></i>{{ $job->experience }} Year Exp.</li>
-                </ul>                
+                  <li><i class="ti-credit-card padd-r-10"></i>Salary: {{ $job->min_salary }} - {{ $job->max_salary }}</li>
+                  @if($job->external_website_link)
+                  <li><i class="ti-world padd-r-10"></i><a href="{{ $job->company_website }}" target="_blank">{{ $job->external_website_link }}</a></li>
+                  @endif
+                  <li><i class="ti-email padd-r-10"></i>{{ $job->job_contact_email }}</li>
+                  <li><i class="ti-pencil-alt padd-r-10"></i>Education: {{ optional($job->education)->name ?? 'N/A' }}</li>
+                  <li><i class="ti-shield padd-r-10"></i>{{ $job->min_experience }} - {{ $job->max_experience }} Years Exp.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -149,7 +139,6 @@
           <div class="utf_grid_job_widget_area">
             <span class="job-type {{ $similar->job_type }}">{{ ucfirst($similar->job_type) }}</span>
             <div class="u-content">
-              <div class="avatar box-80"> <img class="img-responsive" src="{{ asset($similar->company_logo) }}" alt=""> </div>
               <h5><a href="{{ route('job.detail', $similar->id) }}">{{ $similar->title }}</a></h5>
               <p class="text-muted">{{ $similar->location }}</p>
             </div>
@@ -162,5 +151,17 @@
     </div>
   </div>
 </section>
+
+<script>
+function applyNow(method, email, phone, website) {
+  if (method === 'email') {
+    window.location.href = "mailto:" + email;
+  } else if (method === 'whatsapp') {
+    window.location.href = "https://wa.me/" + phone;
+  } else if (method === 'external_website') {
+    window.open(website, '_blank');
+  }
+}
+</script>
 
 @endsection

@@ -133,13 +133,34 @@
 
                             <div>
                                 <label for="no_of_position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Employeer Email </label>
-                                <input type="email" name="job_contact_email" id="job_contact_email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
+                                <input type="email" name="job_contact_email" id="job_contact_email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm"  placeholder="Enter contact email" >
                             </div>
 
-                            <!-- <div>
-                                <label for="no_of_position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Job Expiry Date </label>
-                                <input type="date" name="job_expiry_date" id="job_expiry_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
-                            </div> -->
+                                 <!-- Job Contact Number -->
+                        <div class="mb-4">
+                            <label for="job_contact_no" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Employer Contact Number</label>
+                            <input type="text" name="job_contact_no" id="job_contact_no" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" placeholder="Enter contact number">
+                        </div>
+                          <!-- Apply Via -->
+                          <div class="mb-4">
+                            <label for="apply_via" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apply Via</label>
+                            <select name="apply_via" id="apply_via" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                                <option value="">Select Apply Method</option>
+                                <option value="website">Website</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone Number</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <input type="text" name="external_website_link" id="external_website_link" class="mt-2 hidden w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter Website Link">
+                            <input type="text" name="job_contact_no" id="job_contact_no" class="mt-2 hidden w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter Contact Number">
+                        </div>
+                        <!-- External Website Link -->
+                        <div class="mb-4">
+                            <label for="external_website_link" class="block text-sm font-medium text-gray-700 dark:text-gray-300">External Website Link</label>
+                            <input type="url" name="external_website_link" id="external_website_link" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" placeholder="Enter external job link">
+                        </div>
+
+                      
                         </div>
 
                         <!-- Submit Button -->

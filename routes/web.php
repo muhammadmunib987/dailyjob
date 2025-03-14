@@ -26,4 +26,21 @@ Route::middleware('auth')->group(function () {
 
 
  
+
+Route::get('auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    $user = User::updateOrCreate([
+        'email' => $googleUser->getEmail(),
+    ], [
+        'name' => $googleUser->getName(),
+        'google_id' => $googleUser->getId(),
+        'password' => bcrypt(uniqid()), // Random password for safety
+    ]);
+
+    Auth::login($user);
+
+    return redirect()->route('home'); // Redirect to dashboard/home
+});
+
 require __DIR__.'/auth.php';

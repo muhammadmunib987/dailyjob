@@ -13,8 +13,8 @@ class CustomPageController extends Controller
         return view('frontend.custom_page', compact('page'));
     }
     public function jobDetail($id) {
-        $job = JobInfo::with('skills')->where('id', $id)->firstOrFail();
-
+        $job = JobInfo::with('skills','jobType')->where('id', $id)->firstOrFail();
+        
         $similar_jobs = JobInfo::whereHas('skills', function ($query) use ($job) {
             $query->whereIn('skills.id', $job->skills->pluck('id'));
         })
