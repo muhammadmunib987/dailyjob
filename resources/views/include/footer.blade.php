@@ -55,7 +55,6 @@
           <div class="col-md-3 col-sm-6">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Jobs Listing</a></li>
               <li><a href="{{ route('page.show', 'about-us') }}"><i class="fa fa-angle-double-right"></i> About Us</a></li>
               <li><a href="{{route('contact-us')}}"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
               <li><a href="{{ route('page.show', 'privacy-policy') }}"><i class="fa fa-angle-double-right"></i> Privacy Policy</a></li>

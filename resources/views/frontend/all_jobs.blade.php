@@ -17,205 +17,147 @@
 <section class="padd-top-80 padd-bot-80">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 col-sm-5">
+
+    
+    <div class="col-md-3 col-sm-5">
+    <form method="GET" action="{{ route('job.search') }}">
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-body">
-            <div class="search_widget_job">
-              <div class="field_w_search">
-                <input type="text" class="form-control" placeholder="Search Keywords">
-              </div>
-              <div class="field_w_search">
-                <input type="text" class="form-control" placeholder="All Locations">
-              </div>
+            <div class="widget-boxed-body">
+                <div class="search_widget_job">
+                    <div class="field_w_search">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search Keywords" value="{{ request('keyword') }}">
+                    </div>
+                    <div class="field_w_search">
+                        <input type="text" class="form-control" name="location" placeholder="All Locations" value="{{ request('location') }}">
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
+
+        <!-- Salary Filter -->
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-header">
-            <h4>Offerd Salary</h4>
-          </div>
-          <div class="widget-boxed-body">
-            <div class="side-list no-border">
-              <ul>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="1">
-                    <label for="1"></label>
-                  </span> Under $10,000 <span class="pull-right">102</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="2">
-                    <label for="2"></label>
-                  </span> $10,000 - $15,000 <span class="pull-right">78</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="3">
-                    <label for="3"></label>
-                  </span> $15,000 - $20,000 <span class="pull-right">12</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="4">
-                    <label for="4"></label>
-                  </span> $20,000 - $30,000 <span class="pull-right">85</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="5">
-                    <label for="5"></label>
-                  </span> $30,000 - $40,000 <span class="pull-right">307</span>
-                </li>
-              </ul>
+            <div class="widget-boxed-header"><h4>Offered Salary</h4></div>
+            <div class="widget-boxed-body">
+                <div class="side-list no-border">
+                    <ul>
+                        @foreach([
+                            '1' => 'Under $10,000',
+                            '2' => '$10,000 - $15,000',
+                            '3' => '$15,000 - $20,000',
+                            '4' => '$20,000 - $30,000',
+                            '5' => '$30,000 - $40,000'
+                        ] as $key => $label)
+                        <li>
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="salary_{{ $key }}" name="salary[]" value="{{ $key }}" {{ in_array($key, (array)request('salary', [])) ? 'checked' : '' }}>
+                                <label for="salary_{{ $key }}"></label>
+                            </span> {{ $label }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
+
+        <!-- Job Type Filter -->
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-header">
-            <h4>Job Type</h4>
-          </div>
-          <div class="widget-boxed-body">
-            <div class="side-list no-border">
-              <ul>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="a1">
-                    <label for="a1"></label>
-                  </span> Full Time <span class="pull-right">102</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="b1">
-                    <label for="b1"></label>
-                  </span> Part Time <span class="pull-right">78</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="c1">
-                    <label for="c1"></label>
-                  </span> Internship <span class="pull-right">12</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="d1">
-                    <label for="d1"></label>
-                  </span> Freelancer <span class="pull-right">85</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="e1">
-                    <label for="e1"></label>
-                  </span> Contract Base <span class="pull-right">307</span>
-                </li>
-              </ul>
+            <div class="widget-boxed-header"><h4>Job Type</h4></div>
+            <div class="widget-boxed-body">
+                <div class="side-list no-border">
+                    <ul>
+                        @foreach($jobTypes as $jobType)
+                        <li>
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="job_type_{{ $jobType->id }}" name="job_type[]" value="{{ $jobType->id }}" {{ in_array($jobType->id, (array)request('job_type', [])) ? 'checked' : '' }}>
+                                <label for="job_type_{{ $jobType->id }}"></label>
+                            </span> {{ $jobType->title }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
+
+        <!-- Designation Filter -->
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-header br-0">
-            <h4>Designation <a href="#designation" data-toggle="collapse"><i class="pull-right ti-plus" aria-hidden="true"></i></a></h4>
-          </div>
-          <div class="widget-boxed-body collapse" id="designation">
-            <div class="side-list no-border">
-              <ul>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="a">
-                    <label for="a"></label>
-                  </span> Web Designer <span class="pull-right">102</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="b">
-                    <label for="b"></label>
-                  </span> Php Developer <span class="pull-right">78</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="c">
-                    <label for="c"></label>
-                  </span> Project Manager <span class="pull-right">12</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="d">
-                    <label for="d"></label>
-                  </span> Human Resource <span class="pull-right">85</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="e">
-                    <label for="e"></label>
-                  </span> CMS Developer <span class="pull-right">307</span>
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="f">
-                    <label for="f"></label>
-                  </span> App Developer <span class="pull-right">256</span>
-                </li>
-              </ul>
+            <div class="widget-boxed-header br-0">
+                <h4>Designation <a href="#designation" data-toggle="collapse"><i class="pull-right ti-plus" aria-hidden="true"></i></a></h4>
             </div>
-          </div>
+            <div class="widget-boxed-body collapse" id="designation">
+                <div class="side-list no-border">
+                    <ul>
+                        @foreach($designations as $designation)
+                        <li>
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="designation_{{ $designation->id }}" name="designation[]" value="{{ $designation->id }}" {{ in_array($designation->id, (array)request('designation', [])) ? 'checked' : '' }}>
+                                <label for="designation_{{ $designation->id }}"></label>
+                            </span> {{ $designation->title }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
+
+        <!-- Experience Filter -->
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-header br-0">
-            <h4>Experince <a href="#experince" data-toggle="collapse"><i class="pull-right ti-plus" aria-hidden="true"></i></a></h4>
-          </div>
-          <div class="widget-boxed-body collapse" id="experince">
-            <div class="side-list no-border">
-              <ul>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="11">
-                    <label for="11"></label>
-                  </span> 1Year To 2Year
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="21">
-                    <label for="21"></label>
-                  </span> 2Year To 3Year
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="31">
-                    <label for="31"></label>
-                  </span> 3Year To 4Year
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="41">
-                    <label for="41"></label>
-                  </span> 4Year To 5Year
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="51">
-                    <label for="51"></label>
-                  </span> 5Year To 7Year
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="61">
-                    <label for="61"></label>
-                  </span> 7Year To 10Year
-                </li>
-              </ul>
+            <div class="widget-boxed-header br-0">
+                <h4>Experience <a href="#experience" data-toggle="collapse"><i class="pull-right ti-plus" aria-hidden="true"></i></a></h4>
             </div>
-          </div>
+            <div class="widget-boxed-body collapse" id="experience">
+                <div class="side-list no-border">
+                    <ul>
+                        @foreach([
+                            '11' => '1 Year To 2 Year',
+                            '21' => '2 Year To 3 Year',
+                            '31' => '3 Year To 4 Year',
+                            '41' => '4 Year To 5 Year',
+                            '51' => '5 Year To 7 Year',
+                            '61' => '7 Year To 10 Year'
+                        ] as $key => $label)
+                        <li>
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="experience_{{ $key }}" name="experience[]" value="{{ $key }}" {{ in_array($key, (array)request('experience', [])) ? 'checked' : '' }}>
+                                <label for="experience_{{ $key }}"></label>
+                            </span> {{ $label }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
+
+        <!-- Job Shift -->
         <div class="widget-boxed padd-bot-0">
-          <div class="widget-boxed-header br-0">
-            <h4>Qualification <a href="#qualification" data-toggle="collapse"><i class="pull-right ti-plus" aria-hidden="true"></i></a></h4>
-          </div>
-          <div class="widget-boxed-body collapse" id="qualification">
-            <div class="side-list no-border">
-              <ul>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="12">
-                    <label for="12"></label>
-                  </span> High School
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="22">
-                    <label for="22"></label>
-                  </span> Intermediate
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="32">
-                    <label for="32"></label>
-                  </span> Graduation
-                </li>
-                <li> <span class="custom-checkbox">
-                    <input type="checkbox" id="42">
-                    <label for="42"></label>
-                  </span> Master Degree
-                </li>
-              </ul>
+            <div class="widget-boxed-header"><h4>Job Shift</h4></div>
+            <div class="widget-boxed-body">
+                <div class="side-list no-border">
+                    <ul>
+                        <li><span class="custom-checkbox">
+                            <input type="checkbox" id="shift_morning" name="job_shift[]" value="Morning" {{ in_array('Morning', (array)request('job_shift', [])) ? 'checked' : '' }}>
+                            <label for="shift_morning"></label>
+                        </span> Morning</li>
+                        <li><span class="custom-checkbox">
+                            <input type="checkbox" id="shift_evening" name="job_shift[]" value="Evening" {{ in_array('Evening', (array)request('job_shift', [])) ? 'checked' : '' }}>
+                            <label for="shift_evening"></label>
+                        </span> Evening</li>
+                        <li><span class="custom-checkbox">
+                            <input type="checkbox" id="shift_night" name="job_shift[]" value="Night" {{ in_array('Night', (array)request('job_shift', [])) ? 'checked' : '' }}>
+                            <label for="shift_night"></label>
+                        </span> Night</li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+
+
+
+        <div class="col-md-12 col-sm-12">
+            <button class="btn theme-btn" type="submit">Search Jobs</button>
+        </div>
+    </form>
+</div>
+
 
       <!-- Start Job List -->
 
@@ -265,15 +207,17 @@
                         <div class="row">
                             <div class="col-md-9 col-sm-12 col-xs-12">
                                 <ul class="can-skils">
-                                    <li><strong>Job Id: </strong>{{ $job->id ?? 'G00000' }}</li>
+                                    <li><strong>Job Posted: </strong>{{ $job->created_at->diffForHumans() }}</li>
                                     <li><strong>Job Type: </strong>{{ $job->jobType->title ?? 'Full Time' }}</li>
+                                    @if(count($job->skills)>0)
                                     <li><strong>Skills: </strong>
                                         <div>
-                                            <span class="skill-tag">HTML</span>
-                                            <span class="skill-tag">CSS</span>
-                                            <span class="skill-tag">JavaScript</span>
+                                            @foreach($job->skills as $skill)
+                                             <span class="skill-tag">{{$skill->title}}</span>
+                                            @endforeach
                                         </div>
                                     </li>
+                                    @endif
                                     <li><strong>Experience: </strong>{{ $job->min_experience ?? 0 }} - {{ $job->max_experience ?? 'N/A' }} Years</li>
                                     <li><strong>Location: </strong>{{ $job->location ?? 'Not specified' }}</li>
                                 </ul>

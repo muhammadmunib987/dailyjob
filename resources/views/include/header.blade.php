@@ -36,6 +36,9 @@
             <li><a href="404.html">404</a></li>
           </ul>
         </li> -->
+        @foreach ($jobCategories as $category)
+        <li class="dropdown">  <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($category->id), 'type' => 'category']) }}">{{$category->title}}</a> </li>
+        @endforeach
         <li class="dropdown">  <a href="{{ route('page.show', 'about-us') }}">About Us</a> </li>
        
         <li class="dropdown"> <a href="{{route('contact-us')}}">Contact</a> </li>

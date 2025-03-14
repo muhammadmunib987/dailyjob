@@ -9,48 +9,39 @@
         <h2>Search Between More Then <span class="theme-cl">50,000</span> Open Jobs.</h2>
         <p>Trending Jobs Keywords: <span class="trending_key"><a href="#">Web Designer</a></span> <span class="trending_key"><a href="#">Web Developer</a></span> <span class="trending_key"><a href="#">IOS Developer</a></span> <span class="trending_key"><a href="#">Android Developer</a></span></p>
       </div>
-      <form>
-        <fieldset class="utf_home_form_one">
-          <div class="col-md-4 col-sm-4 padd-0">
-            <input type="text" class="form-control br-1" placeholder="Search Keywords..." />
-          </div>
-          <div class="col-md-3 col-sm-3 padd-0">
-            <select class="wide form-control br-1">
-              <option data-display="Location">All Country</option>
-              <option value="1">Afghanistan</option>
-              <option value="2">Albania</option>
-              <option value="3">Algeria</option>
-              <option value="4">Brazil</option>
-              <option value="5">Burundi</option>
-              <option value="6">Bulgaria</option>
-              <option value="7">Germany</option>
-              <option value="8">Grenada</option>
-              <option value="9">Guatemala</option>
-              <option value="10" disabled>Iceland</option>
+      <form method="GET" action="{{ route('job.search') }}">
+    <fieldset class="utf_home_form_one">
+        <div class="col-md-4 col-sm-4 padd-0">
+            <input type="text" name="keyword" class="form-control br-1" placeholder="Search Keywords..." />
+        </div>
+        
+
+        <!-- Dynamic Category Dropdown -->
+        <div class="col-md-3 col-sm-3 padd-0">
+            <select class="wide form-control" name="category">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
             </select>
-          </div>
-          <div class="col-md-3 col-sm-3 padd-0">
-            <select class="wide form-control">
-              <option data-display="Category">Show All</option>
-              <option value="1">Software Developer</option>
-              <option value="2">Java Developer</option>
-              <option value="3">Software Engineer</option>
-              <option value="4">Web Developer</option>
-              <option value="5">PHP Developer</option>
-              <option value="6">Python Developer</option>
-              <option value="7">Front end Developer</option>
-              <option value="8">Associate Developer</option>
-              <option value="9">Back end Developer</option>
-              <option value="10">XML Developer</option>
-              <option value="11">.NET Developer</option>
-              <option value="12" disabled>Marketting Developer</option>
+        </div>
+
+        <!-- Dynamic Designation Dropdown -->
+        <div class="col-md-3 col-sm-3 padd-0">
+            <select class="wide form-control" name="designation">
+                <option value="">Select Designation</option>
+                @foreach($designations as $designation)
+                    <option value="{{ $designation->id }}">{{ $designation->title }}</option>
+                @endforeach
             </select>
-          </div>
-          <div class="col-md-2 col-sm-2 padd-0 m-clear">
+        </div>
+
+        <div class="col-md-2 col-sm-2 padd-0 m-clear">
             <button type="submit" class="btn theme-btn cl-white seub-btn">Search</button>
-          </div>
-        </fieldset>
-      </form>
+        </div>
+    </fieldset>
+</form>
+
     </div>
   </div>
 </div>
@@ -68,40 +59,40 @@
         <div class="row">
           <!-- Single Job -->
           @foreach ($jobs as $job)
-    <div class="col-md-3 col-sm-6">
-        <div class="utf_grid_job_widget_area"> 
-            <span class="job-type full-type">{{ $job->jobType->title ?? 'Full Time' }}</span>
+          <div class="col-md-3 col-sm-6">
+            <div class="utf_grid_job_widget_area">
+              <span class="job-type full-type">{{ $job->jobType->title ?? 'Full Time' }}</span>
 
-            <div class="utf_job_like">
+              <div class="utf_job_like">
                 <label class="toggler toggler-danger">
-                    <input type="checkbox">
-                    <i class="fa fa-heart"></i>
+                  <input type="checkbox">
+                  <i class="fa fa-heart"></i>
                 </label>
-            </div>
+              </div>
 
-            <div class="u-content">
-                <div class="avatar box-80"> 
-                    <a href="#"> 
-                        <img class="img-responsive" src="{{ asset('assets/img/company_logo_1.png') }}" alt=""> 
-                    </a> 
+              <div class="u-content">
+                <div class="avatar box-80">
+                  <a href="#">
+                    <img class="img-responsive" src="{{ asset('assets/img/company_logo_1.png') }}" alt="">
+                  </a>
                 </div>
                 <h6><a href="{{ route('job_detail', $job->id) }}">{{ $job->title }}</a></h6>
                 <p class="text-muted">{{ $job->location }}</p>
-            </div>
+              </div>
 
-            <div class="utf_apply_job_btn_item"> 
-                <a href="{{ route('job_detail', $job->id) }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a> 
+              <div class="utf_apply_job_btn_item">
+                <a href="{{ route('job_detail', $job->id) }}" class="btn job-browse-btn btn-radius br-light">View Detail</a>
+              </div>
             </div>
-        </div>
-    </div>
-@endforeach
+          </div>
+          @endforeach
 
         </div>
       </div>
 
     </div>
     <div class="col-md-12 mrg-top-20 text-center">
-      <a href="job-layout-one.html" class="btn theme-btn btn-m">Browse All Jobs</a>
+      <a href="{{route('job.search')}}" class="btn theme-btn btn-m">Browse All Jobs</a>
     </div>
   </div>
 </section>
@@ -119,110 +110,26 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+
+        @foreach($designations as $designation)
         <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
+          <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($designation->id), 'type' => 'designation']) }}" title="{{ $designation->title }}">
             <div class="utf_category_box_area">
               <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="icon-bargraph" aria-hidden="true"></i> </div>
+                <div class="utf_category_icon">
+                  <i class="{{ $designation->icon }}" aria-hidden="true"></i>
+                </div>
                 <div class="category-detail utf_category_desc_text">
-                  <h4>Web & Software Dev</h4>
-                  <p>122 Jobs</p>
+                  <h4>{{ $designation->title }}</h4>
+                  <p>{{ $designation->jobs_count ?? 0 }} Jobs</p>
                 </div>
               </div>
             </div>
           </a>
         </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="icon-tools" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Data Science & Analitycs</h4>
-                  <p>155 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="ti-briefcase" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Accounting & Consulting</h4>
-                  <p>300 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="ti-ruler-pencil" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Writing & Translations</h4>
-                  <p>80 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="icon-briefcase" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Sales & Marketing</h4>
-                  <p>120 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="icon-wine" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Graphics & Design</h4>
-                  <p>78 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="ti-world" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Digital Marketing</h4>
-                  <p>90 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <a href="browse-job.html" title="">
-            <div class="utf_category_box_area">
-              <div class="utf_category_desc">
-                <div class="utf_category_icon"> <i class="ti-desktop" aria-hidden="true"></i> </div>
-                <div class="category-detail utf_category_desc_text">
-                  <h4>Education & Training</h4>
-                  <p>210 Jobs</p>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+        @endforeach
+
+
         <div class="col-md-12 mrg-top-20 text-center">
           <a href="browse-category.html" class="btn theme-btn btn-m">View All Categories</a>
         </div>

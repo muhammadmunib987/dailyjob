@@ -21,7 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $jobCategories = Category::where('status', 1)->get();
+      $jobCategories = Category::where('status', 1)
+        ->withCount('jobs')  // Count related jobs
+        ->orderBy('jobs_count', 'DESC') // Order by job count
+        ->limit(3) // Get top 5 categories
+        ->get();
+
         $jobTypes = JobType::where('status', 1)->get();
         
         View::share(compact('jobCategories', 'jobTypes'));

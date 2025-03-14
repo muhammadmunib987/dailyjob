@@ -18,6 +18,12 @@ return new class extends Migration
             $table->longText('content');
             $table->string('banner_image')->nullable(); // Stores image URL or path
             $table->integer('status')->default(1);
+
+                // SEO Meta Tags
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            
             $table->timestamps();
         });
     }

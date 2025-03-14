@@ -10,8 +10,16 @@ class CustomPageController extends Controller
 {
     public function show($slug) {
         $page = CustomPage::where('slug', $slug)->firstOrFail();
-        return view('frontend.custom_page', compact('page'));
+    
+        // Use the page's metadata if available; otherwise, use default values
+        $metaData = [
+            'meta_title' => $page->meta_title ?? config('constants.meta_title'),
+            'meta_description' => $page->meta_description ?? config('constants.meta_description'),
+            'meta_keywords' => $page->meta_keywords ?? config('constants.meta_keywords'),
+        ];
+        return view('frontend.custom_page', compact('page', 'metaData'));
     }
+    
     public function jobDetail($id) {
         $job = JobInfo::with('skills','jobType')->where('id', $id)->firstOrFail();
         
