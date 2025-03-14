@@ -17,26 +17,31 @@
       </div>	
       <div class="col-md-9 col-sm-8">
         <div class="row">
-          <div class="col-md-3 col-sm-6">
-            <h4>Job Categories</h4>
+              <div class="col-md-3 col-sm-6">
+          <h4>Job Categories</h4>
             <ul>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Work from Home</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Internship Job</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Freelancer Job</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Part Time Job</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Full Time Job</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <h4>Job Type</h4>
-            <ul>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Create Account</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Career Counseling</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> My Oficiona</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> FAQ</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Report a Problem</a></li>
-            </ul>
-          </div>
+                @foreach ($jobCategories as $category)
+                    <li>
+                        <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($category->id), 'type' => 'category']) }}">
+                            <i class="fa fa-angle-double-right"></i> {{ $category->title }}
+                        </a>
+                    </li>
+                @endforeach
+          </ul>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+          <h4>Job Type</h4>
+          <ul>
+              @foreach ($jobTypes as $type)
+                  <li>
+                      <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($type->id), 'type' => 'job_type']) }}">
+                          <i class="fa fa-angle-double-right"></i> {{ $type->title }}
+                      </a>
+                  </li>
+              @endforeach
+          </ul>
+      </div>
           <div class="col-md-3 col-sm-6">
             <h4>Resources</h4>
             <ul>
@@ -51,10 +56,11 @@
             <h4>Quick Links</h4>
             <ul>
               <li><a href="#"><i class="fa fa-angle-double-right"></i> Jobs Listing</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> About Us</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Privacy Policy</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Term & Condition</a></li>
+              <li><a href="{{ route('page.show', 'about-us') }}"><i class="fa fa-angle-double-right"></i> About Us</a></li>
+              <li><a href="{{route('contact-us')}}"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
+              <li><a href="{{ route('page.show', 'privacy-policy') }}"><i class="fa fa-angle-double-right"></i> Privacy Policy</a></li>
+              <li><a href="{{ route('page.show', 'terms-conditions') }}"><i class="fa fa-angle-double-right"></i> Term & Condition</a></li>
+              <li><a href="{{ route('page.show', 'disclaimer') }}"><i class="fa fa-angle-double-right"></i> Disclaimer</a></li>
             </ul>
           </div>
         </div>

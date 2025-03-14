@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->comment('Foreign key for job category');
             $table->string('title');
             $table->string('image');
-            $table->string('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

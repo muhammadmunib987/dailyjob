@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('custom_pages', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('title');
+            $table->longText('content');
+            $table->string('banner_image')->nullable(); // Stores image URL or path
             $table->integer('status')->default(1);
-            $table->foreignId('designation_id')->constrained('designations')->comment('Foreign key for job designation');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('custom_pages');
     }
 };

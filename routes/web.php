@@ -4,12 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\CustomPageController;
 
-Route::get('/', [SurveyController::class, 'home'])->name('home');
-Route::view('/job_detail', 'frontend.job_detail')->name('job_detail');
-Route::view('/about-us', 'frontend.about_us');
-Route::view('/contact-us', 'frontend.contact_us');
-Route::view('/all-job', 'frontend.all_jobs');
+Route::get('/', [JobController::class, 'home'])->name('home');
+Route::get('/job_detail/{id}', [CustomPageController::class, 'jobDetail'])->name('job_detail');
+Route::get('/page/{slug}', [CustomPageController::class, 'show'])->name('page.show');
+Route::get('/search-jobs/{id}/{type}', [JobController::class, 'index'])->name('search.jobs');
+Route::view('/contact-us', 'frontend.contact_us')->name('contact-us');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -21,10 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('jobs', JobController::class); 
 });
-
-Route::get('/', [SurveyController::class, 'home'])->name('home');
-// Route::get('/survey', [SurveyController::class, 'showForm'])->name('survey.form');
-// Route::post('/survey', [SurveyController::class, 'submitForm'])->name('survey.submit');
 
 
  

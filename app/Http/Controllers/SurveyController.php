@@ -8,10 +8,7 @@ use App\Models\Post;
 
 class SurveyController extends Controller
 {
-    public function home()
-    {
-        return view('home');
-    }
+   
     public function showForm()
     {
         return view('survey_form');

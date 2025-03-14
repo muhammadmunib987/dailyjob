@@ -218,90 +218,135 @@
       </div>
 
       <!-- Start Job List -->
+
       <div class="col-md-9 col-sm-7">
         <div class="row mrg-bot-20">
-          <div class="col-md-4 col-sm-12 col-xs-12 browse_job_tlt">
-            <h4 class="job_vacancie">98 Jobs &amp; Vacancies</h4>
-          </div>
-          <div class="col-md-8 col-sm-12 col-xs-12">
-            <div class="fl-right short_by_filter_list">
-              <div class="search-wide short_by_til">
-                <h5>Short By</h5>
-              </div>
-              <div class="search-wide full">
-                <select class="wide form-control" style="display: none;">
-                  <option value="1">Most Recent</option>
-                  <option value="2">Most Viewed</option>
-                  <option value="4">Most Search</option>
-                </select>
-                <div class="nice-select wide form-control" tabindex="0"><span class="current">Most Recent</span>
-                  <ul class="list">
-                    <li data-value="1" class="option selected">Most Recent</li>
-                    <li data-value="2" class="option">Most Viewed</li>
-                    <li data-value="4" class="option">Most Search</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="search-wide full">
-                <select class="wide form-control" style="display: none;">
-                  <option>10 Per Page</option>
-                  <option value="1">20 Per Page</option>
-                  <option value="2">30 Per Page</option>
-                  <option value="4">50 Per Page</option>
-                </select>
-                <div class="nice-select wide form-control" tabindex="0"><span class="current">10 Per Page</span>
-                  <ul class="list">
-                    <li data-value="10 Per Page" class="option selected">10 Per Page</li>
-                    <li data-value="1" class="option">20 Per Page</li>
-                    <li data-value="2" class="option">30 Per Page</li>
-                    <li data-value="4" class="option">50 Per Page</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 browse_job_tlt">
+                <h4 class="job_vacancie">{{ $jobs->total() }} Jobs &amp; Vacancies</h4>
             </div>
-          </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="fl-right short_by_filter_list">
+                    <div class="search-wide short_by_til">
+                        <h5>Sort By</h5>
+                    </div>
+                    <div class="search-wide full">
+                        <select class="wide form-control" id="sort_by">
+                            <option value="most_recent">Most Recent</option>
+                            <option value="most_viewed">Most Viewed</option>
+                            <option value="most_searched">Most Searched</option>
+                        </select>
+                    </div>
+                    <div class="search-wide full">
+                        <select class="wide form-control" id="per_page">
+                            <option value="10">10 Per Page</option>
+                            <option value="20">20 Per Page</option>
+                            <option value="30">30 Per Page</option>
+                            <option value="50">50 Per Page</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Single Verticle job -->
-        <div class="job-verticle-list">
-          <div class="vertical-job-card">
-            <div class="vertical-job-header">
-              <div class="vrt-job-cmp-logo"> <a href="{{route('job_detail')}}"><img src="assets/img/company_logo_1.png" class="img-responsive" alt=""></a> </div>
-              <h4><a href="{{route('job_detail')}}">Apple LTD</a></h4>
-              <span class="com-tagline">Software Development</span> <span class="pull-right vacancy-no">No. <span class="v-count">2</span></span>
-            </div>
-            <div class="vertical-job-body">
-              <div class="row">
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                  <ul class="can-skils">
-                    <li><strong>Job Id: </strong>G58726</li>
-                    <li><strong>Job Type: </strong>Full Time</li>
-                    <li><strong>Skills: </strong>
-                      <div><span class="skill-tag">HTML</span> <span class="skill-tag">css</span> <span class="skill-tag">java</span> <span class="skill-tag">php</span></div>
-                    </li>
-                    <li><strong>Experience: </strong>3 Year</li>
-                    <li><strong>Location: </strong>2844 Counts Lane, KY 45241</li>
-                  </ul>
+        @foreach ($jobs as $job)
+            <div class="job-verticle-list">
+                <div class="vertical-job-card">
+                    <div class="vertical-job-header">
+                        <div class="vrt-job-cmp-logo">
+                            <a href="{{ route('job_detail', $job->id) }}">
+                                <img src="{{ asset('assets/img/company_logo_1.png') }}" class="img-responsive" alt="">
+                            </a>
+                        </div>
+                        <h4><a href="{{ route('job_detail', $job->id) }}">{{ $job->title ?? 'Job Title' }}</a></h4>
+                        <span class="com-tagline">{{ $job->category->title ?? 'Software Development' }}</span>
+                        <span class="pull-right vacancy-no">No. <span class="v-count">{{ $job->no_of_position ?? 1 }}</span></span>
+                    </div>
+                    <div class="vertical-job-body">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12 col-xs-12">
+                                <ul class="can-skils">
+                                    <li><strong>Job Id: </strong>{{ $job->id ?? 'G00000' }}</li>
+                                    <li><strong>Job Type: </strong>{{ $job->jobType->title ?? 'Full Time' }}</li>
+                                    <li><strong>Skills: </strong>
+                                        <div>
+                                            <span class="skill-tag">HTML</span>
+                                            <span class="skill-tag">CSS</span>
+                                            <span class="skill-tag">JavaScript</span>
+                                        </div>
+                                    </li>
+                                    <li><strong>Experience: </strong>{{ $job->min_experience ?? 0 }} - {{ $job->max_experience ?? 'N/A' }} Years</li>
+                                    <li><strong>Location: </strong>{{ $job->location ?? 'Not specified' }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <div class="vrt-job-act">
+                                    <a href="#" data-toggle="modal" data-target="#apply-job" class="btn-job theme-btn job-apply">Apply Now</a>
+                                    <a href="{{ route('job_detail', $job->id) }}" class="btn-job light-gray-btn">View Job</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                  <div class="vrt-job-act"> <a href="#" data-toggle="modal" data-target="#apply-job" class="btn-job theme-btn job-apply">Apply Now</a> <a href="{{route('job_detail')}}" title="" class="btn-job light-gray-btn">View Job</a> </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
+        @endforeach
 
         <div class="clearfix"></div>
+
+        <!-- pagination desgin   -->
         <div class="utf_flexbox_area padd-0">
-          <ul class="pagination">
-            <li class="page-item"> <a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">«</span> <span class="sr-only">Previous</span> </a> </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"> <a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">»</span> <span class="sr-only">Next</span> </a> </li>
-          </ul>
-        </div>
-      </div>
+    @if ($jobs->hasPages())
+        <ul class="pagination">
+            {{-- Previous Page Link --}}
+            @if ($jobs->onFirstPage())
+                <li class="page-item disabled">
+                    <span class="page-link">«</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $jobs->previousPageUrl() }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+            @endif
+
+            {{-- Pagination Elements --}}
+            @foreach ($jobs->links()->elements as $element)
+                @if (is_string($element))
+                    <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
+                @endif
+
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $jobs->currentPage())
+                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+
+            {{-- Next Page Link --}}
+            @if ($jobs->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link">»</span>
+                </li>
+            @endif
+        </ul>
+    @endif
+</div>
+
+
+
+    </div>
+
+
     </div>
     <!-- End Row -->
   </div>

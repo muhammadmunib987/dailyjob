@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class JobInfo extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'title',
         'category_id',
@@ -28,6 +29,6 @@ class JobInfo extends Model
 
     public function skills()
     {
-        return $this->belongsToMany(JobSkill::class, 'job_skills'); // Define pivot table if needed
+        return $this->belongsToMany(Skill::class, 'job_skills', 'job_info_id', 'job_skill_id');
     }
 }

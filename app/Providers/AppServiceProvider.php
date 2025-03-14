@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\Category;
+use App\Models\JobType;
+use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $jobCategories = Category::where('status', 1)->get();
+        $jobTypes = JobType::where('status', 1)->get();
+        
+        View::share(compact('jobCategories', 'jobTypes'));
     }
 }

@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(DesignationSeeder::class);
         $this->call(SkillSeeder::class);
+        $this->call(PageSeeder::class);
+        $this->call(JobTypeSeeder::class);
+        $this->call(JobInfoSeeder::class);
   
 
         // User::factory()->create([

@@ -8,16 +8,43 @@ use App\Models\Designation;
 use App\Models\JobType;
 use App\Models\Skill;
 use App\Models\JobInfo;
+use Illuminate\Support\Facades\Crypt;
 
 class JobController extends Controller
 {
-    /**
+    /**-
+     * 3
      * Display a listing of the resource.
      */
-    public function index()
+    public function home()
     {
-        
-        //
+        // Start the query
+        $query = JobInfo::orderby('id','DESC');
+        // Get results with pagination
+        $jobs = $query->limit(8)->get(); 
+        return view('home', compact('jobs'));
+    }
+    public function index($encryptedId, $type) {
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            
+            // Start the query
+            $query = JobInfo::orderby('id','DESC');
+            // Apply filter dynamically based on type
+            if ($type === 'category') {
+                $query->where('category_id', $id);
+            } elseif ($type === 'job_type') {
+                $query->where('job_type_id', $id);
+            }
+    
+            // Get results with pagination
+            $jobs = $query->paginate(10); // Adjust pagination as needed
+         
+            return view('frontend.all_jobs', compact('jobs'));
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Invalid ID');
+        }
     }
 
     /**
