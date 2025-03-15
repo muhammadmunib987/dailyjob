@@ -131,7 +131,7 @@
 
 
         <div class="col-md-12 mrg-top-20 text-center">
-          <a href="browse-category.html" class="btn theme-btn btn-m">View All Categories</a>
+          <a href="{{route('categories')}}" class="btn theme-btn btn-m">View All Categories</a>
         </div>
       </div>
     </div>

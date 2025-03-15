@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Designation;
+use App\Models\Contact;
 use App\Models\JobType;
 use App\Models\Skill;
 use App\Models\Education;
@@ -37,6 +38,23 @@ class JobController extends Controller
         ];
     
         return view('home', compact('jobs', 'categories','designations', 'metaData'));
+    }
+    public function categories()
+    {
+        $designations = Designation::select('designations.*')
+            ->withCount('jobs') // Assuming a relationship exists
+            ->orderBy('id', 'DESC')
+            ->limit(8)
+            ->get();
+    
+        // Meta description
+        $metaData = [
+            'meta_title' => 'Find the Latest Jobs in Pakistan - DailyJobs',
+            'meta_description' => 'Discover the most recent job openings in Pakistan, including government and private sector positions. Apply today!',
+            'meta_keywords' => 'jobs in Pakistan, government jobs, private jobs, careers, employment',
+        ];
+    
+        return view('categories', compact('designations', 'metaData'));
     }
     
     public function searchJobs(Request $request, $encryptedId = null, $type = null) {
@@ -133,7 +151,11 @@ class JobController extends Controller
     }
     
 
-    
+    public function index()
+    {
+        $contacts = Contact::orderBy('id', 'desc')->paginate(10); // Pagination applied
+        return view('dashboard', compact('contacts'));
+    }
     
     /**
      * Show the form for creating a new resource.
