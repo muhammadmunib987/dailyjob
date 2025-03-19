@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- ======================= Page Title ===================== -->
-<div class="page-title" style="background-image: url('{{ asset("assets/img/" . $page->banner_image) }}'); background-size: cover; background-position: center;">
+<div class="page-title" style="background-image: url('{{ asset("/storage/assets/img/" . $page->banner_image) }}'); background-size: cover; background-position: center;">
   <div class="container">
     <div class="page-caption">
       <h2>{{ $page->title }}</h2>

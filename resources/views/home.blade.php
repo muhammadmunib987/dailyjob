@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- ======================= Start Banner ===================== -->
-<div class="utf_main_banner_area" style="background-image:url(assets/img/slider_bg.jpg);" data-overlay="8">
+<div class="utf_main_banner_area" style="background-image:url(storage/assets/img/slider_bg.jpg);" data-overlay="8">
   <div class="container">
     <div class="col-md-8 col-sm-10">
       <div class="caption cl-white home_two_slid">
@@ -73,11 +73,11 @@
               <div class="u-content">
                 <div class="avatar box-80">
                   <a href="#">
-                    <img class="img-responsive" src="{{ asset('assets/img/company_logo_1.png') }}" alt="">
+                    <img class="img-responsive" src="{{ asset('storage/assets/img/company_logo_1.png') }}" alt="">
                   </a>
                 </div>
-                <h6><a href="{{ route('job_detail', $job->id) }}">{{ $job->title }}</a></h6>
-                <p class="text-muted">{{ $job->location }}</p>
+                <h1 class="font-14"><a href="{{ route('job_detail', $job->id) }}">{{ substr($job->title ,0,35) }}</a></h1>
+                <p class="text-muted">{{ substr($job->location ,0,35) }}</p>
               </div>
 
               <div class="utf_apply_job_btn_item">
@@ -120,7 +120,7 @@
                   <i class="{{ $designation->icon }}" aria-hidden="true"></i>
                 </div>
                 <div class="category-detail utf_category_desc_text">
-                  <h4>{{ $designation->title }}</h4>
+                  <h1 class="font-14">{{ $designation->title }}</h1>
                   <p>{{ $designation->jobs_count ?? 0 }} Jobs</p>
                 </div>
               </div>
@@ -138,7 +138,7 @@
   </div>
 </section>
 
-<section class="newsletter theme-bg" style="background-image:url(assets/img/bg-new.png)">
+<section class="newsletter theme-bg" style="background-image:url(storage/assets/img/bg-new.png)">
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">

@@ -37,36 +37,7 @@
           {{ $blogs->links() }}
         </div>
       </div>
-      
-      <!-- Sidebar -->
-      <div class="col-md-4 col-sm-5">
-        <div class="sidebar">
-          <div class="widget-boxed">
-            <div class="widget-boxed-header">
-              <h4><i class="ti-search padd-r-10"></i>Search Blogs</h4>
-            </div>
-            <div class="widget-boxed-body">
-              <form action="{{ route('blog.search') }}" method="GET">
-                <input type="text" name="keyword" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn theme-btn">Search</button>
-              </form>
-            </div>
-          </div>
 
-          <div class="widget-boxed">
-            <div class="widget-boxed-header">
-              <h4><i class="ti-list padd-r-10"></i>Categories</h4>
-            </div>
-            <div class="widget-boxed-body">
-              <ul>
-                @foreach($categories as $category)
-                  <li><a href="{{ route('blog.category', $category->id) }}">{{ $category->name }}</a></li>
-                @endforeach
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>

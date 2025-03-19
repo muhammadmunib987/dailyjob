@@ -6,6 +6,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FrontEndController;
 
 Route::get('/', [JobController::class, 'home'])->name('home');
 Route::get('/categories', [JobController::class, 'categories'])->name('categories');
@@ -13,6 +14,7 @@ Route::get('/job_detail/{id}', [CustomPageController::class, 'jobDetail'])->name
 Route::get('/page/{slug}', [CustomPageController::class, 'show'])->name('page.show');
 Route::get('/search-jobs/{id?}/{type?}', [JobController::class, 'searchJobs'])->name('search.jobs');
 Route::get('/find-jobs', [JobController::class, 'searchJobs'])->name('job.search');
+Route::get('/blogs', [FrontEndController::class, 'blogs'])->name('blogs');
 
 
 

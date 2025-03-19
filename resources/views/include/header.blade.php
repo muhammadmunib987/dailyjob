@@ -42,6 +42,7 @@
         <li class="dropdown">  <a href="{{ route('page.show', 'about-us') }}">About Us</a> </li>
        
         <li class="dropdown"> <a href="{{route('contact-us')}}">Contact</a> </li>
+        <li class="dropdown"> <a href="{{route('blogs')}}">Blog</a> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
             @if(Auth::check())
