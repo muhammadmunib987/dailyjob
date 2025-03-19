@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->comment('Blog post title');
             $table->string('slug')->unique()->comment('SEO-friendly URL slug');
-            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null')->comment('Foreign key for category');
+            $table->foreignId('designation_id')->nullable()->constrained('designations')->comment('Foreign key for job designation');
             $table->text('short_description')->nullable()->comment('Short summary of the blog');
             $table->longText('content')->comment('Full blog content');
             $table->string('feature_image')->nullable()->comment('URL for the blog feature image');
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('meta_title')->nullable()->comment('SEO meta title');
             $table->text('meta_description')->nullable()->comment('SEO meta description');
             $table->text('meta_keywords')->nullable()->comment('SEO meta keywords');
-            $table->softDeletes(); // Enables soft delete functionality
             $table->timestamps();
         });
     }

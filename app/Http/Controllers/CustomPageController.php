@@ -23,11 +23,10 @@ class CustomPageController extends Controller
     public function jobDetail($id) {
         $job = JobInfo::with('skills','jobType')->where('id', $id)->firstOrFail();
         
-        $similar_jobs = JobInfo::whereHas('skills', function ($query) use ($job) {
-            $query->whereIn('skills.id', $job->skills->pluck('id'));
-        })
+        $similar_jobs = JobInfo::
+        where('designation_id',$job->designation_id)
         ->where('id', '!=', $job->id) // Exclude the current job
-        ->limit(5) // Limit results
+        ->limit(4) // Limit results
         ->get();
 
         return view('frontend.job_detail', compact('job','similar_jobs'));

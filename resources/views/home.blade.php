@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- ======================= Start Banner ===================== -->
-<div class="utf_main_banner_area" style="background-image:url(storage/assets/img/slider_bg.jpg);" data-overlay="8">
+<div class="utf_main_banner_area" style="background-image:url(public/assets/img/slider_bg.jpg);" data-overlay="8">
   <div class="container">
     <div class="col-md-8 col-sm-10">
       <div class="caption cl-white home_two_slid">
@@ -73,11 +73,11 @@
               <div class="u-content">
                 <div class="avatar box-80">
                   <a href="#">
-                    <img class="img-responsive" src="{{ asset('storage/assets/img/company_logo_1.png') }}" alt="">
+                    <img class="img-responsive" src="{{ asset('public/assets/img/company_logo_1.png') }}" alt="">
                   </a>
                 </div>
-                <h1 class="font-14"><a href="{{ route('job_detail', $job->id) }}">{{ substr($job->title ,0,35) }}</a></h1>
-                <p class="text-muted">{{ substr($job->location ,0,35) }}</p>
+                <h1 class="font-14"><a href="{{ route('job_detail', $job->id) }}">{{ substr($job->title ,0,30) }}</a></h1>
+                <p class="text-muted">{{ substr($job->location ,0,30) }}</p>
               </div>
 
               <div class="utf_apply_job_btn_item">
@@ -117,7 +117,7 @@
             <div class="utf_category_box_area">
               <div class="utf_category_desc">
                 <div class="utf_category_icon">
-                  <i class="{{ $designation->icon }}" aria-hidden="true"></i>
+                  <i class="icon-bargraph" aria-hidden="true"></i>
                 </div>
                 <div class="category-detail utf_category_desc_text">
                   <h1 class="font-14">{{ $designation->title }}</h1>

@@ -4,8 +4,8 @@
   <div class="container"> 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i class="fa fa-bars"></i> </button>
-      <a class="navbar-brand" href="{{route('home')}}"> <img src="{{asset('assets/img/logo-light.png')}}" class="logo logo-display" alt=""> 
-      <img src="{{asset('assets/img/logo.png')}}" class="logo logo-scrolled" alt=""> </a> 
+      <a class="navbar-brand" href="{{route('home')}}"> <img src="{{asset('public/assets/img/logo-light.png')}}" class="logo logo-display" alt=""> 
+      <img src="{{asset('public/assets/img/logo.png')}}" class="logo logo-scrolled" alt=""> </a> 
 	</div>
     <div class="collapse navbar-collapse" id="navbar-menu">
       <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
@@ -48,7 +48,7 @@
             @if(Auth::check())
                 <!-- User is logged in: Show their name -->
                 <li class="br-right">
-                    <a class="btn-signup red-btn" href="{{ route('dashboard') }}">
+                    <a class="btn-signup red-btn" href="#">
                         <i class="login-icon ti-user"></i> {{ Auth::user()->name }}
                     </a>
                 </li>

@@ -16,18 +16,19 @@
     <meta property="og:type" content="website">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('assets')}}/img/favicon.png" />
+    <link rel="shortcut icon" href="{{asset('public/assets')}}/img/favicon.png" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/bootstrap/css/bootstrap-select.min.css">
-    <link href="{{asset('assets')}}/plugins/icons/css/icons.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/plugins/animate/animate.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/plugins/bootstrap/css/bootsnav.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/nice-select/css/nice-select.css">
-    <link href="{{asset('assets')}}/plugins/aos-master/aos.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/assets')}}/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('public/assets')}}/plugins/bootstrap/css/bootstrap-select.min.css">
+    <link href="{{asset('public/assets')}}/plugins/icons/css/icons.css" rel="stylesheet">
+    <link href="{{asset('public/assets')}}/plugins/animate/animate.css" rel="stylesheet">
+    <link href="{{asset('public/assets')}}/plugins/bootstrap/css/bootsnav.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('public/assets')}}/plugins/nice-select/css/nice-select.css">
+    <link href="{{asset('public/assets')}}/plugins/aos-master/aos.css" rel="stylesheet">
+    <link href="{{asset('public/assets')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('public/assets')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('public/assets')}}/css/responsive.css" rel="stylesheet">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;display=swap" rel="stylesheet">

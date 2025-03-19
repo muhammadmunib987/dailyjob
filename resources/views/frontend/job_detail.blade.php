@@ -21,7 +21,7 @@
           <div class="detail-wrapper-body">
             <div class="row">
               <div class="col-md-4 text-center user_profile_img">
-                <img src="{{ asset($job->company_logo ?? 'assets/img/company_logo_1.png') }}" class="width-100" alt="">
+                <img src="{{ asset($job->company_logo ?? 'public/assets/img/company_logo_1.png') }}" class="width-100" alt="">
                 <h4 class="meg-0">{{ $job->title }}</h4>
                 <span>{{ $job->location }}</span>
                 <div class="text-center">
@@ -139,11 +139,11 @@
           <div class="utf_grid_job_widget_area">
             <span class="job-type {{ $similar->job_type }}">{{ ucfirst($similar->job_type) }}</span>
             <div class="u-content">
-              <h5><a href="{{ route('job.detail', $similar->id) }}">{{ $similar->title }}</a></h5>
+              <h5><a href="{{ route('job_detail', $similar->id) }}">{{ substr($job->title ,0,30) }}</a></h5>
               <p class="text-muted">{{ $similar->location }}</p>
             </div>
             <div class="utf_apply_job_btn_item">
-              <a href="{{ route('job.detail', $similar->id) }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a>
+              <a href="{{ route('job_detail', $similar->id) }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a>
             </div>
           </div>
         </div>

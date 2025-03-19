@@ -7,6 +7,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\BlogController;
 
 Route::get('/', [JobController::class, 'home'])->name('home');
 Route::get('/categories', [JobController::class, 'categories'])->name('categories');
@@ -15,6 +16,7 @@ Route::get('/page/{slug}', [CustomPageController::class, 'show'])->name('page.sh
 Route::get('/search-jobs/{id?}/{type?}', [JobController::class, 'searchJobs'])->name('search.jobs');
 Route::get('/find-jobs', [JobController::class, 'searchJobs'])->name('job.search');
 Route::get('/blogs', [FrontEndController::class, 'blogs'])->name('blogs');
+Route::get('/blog-detail/{slug}', [FrontEndController::class, 'blogDetail'])->name('blog.detail');
 
 
 
@@ -30,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('jobs', JobController::class); 
+    Route::resource('blog', BlogController::class); 
 });
 
 

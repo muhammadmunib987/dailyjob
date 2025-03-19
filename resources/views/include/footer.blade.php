@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 col-sm-4">
-        <a href="index.html"><img class="footer-logo" src="{{asset('assets')}}/img/logo.png" alt=""></a>
+        <a href="index.html"><img class="footer-logo" src="{{asset('public/assets')}}/img/logo.png" alt=""></a>
         <p>Lorem Ipsum is simply dummy text of printing and type setting industry. Lorem Ipsum been industry standard dummy text ever since.</p>
         <!-- Social Box -->
         <div class="f-social-box">
@@ -161,16 +161,16 @@
 <div><a href="#" class="scrollup">Scroll</a></div>
 
 <!-- Jquery js-->
-<script src="{{asset('assets')}}/js/jquery.min.js"></script>
-<script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="{{asset('assets')}}/plugins/bootstrap/js/bootsnav.js"></script>
-<script src="{{asset('assets')}}/js/viewportchecker.js"></script>
-<script src="{{asset('assets')}}/js/slick.js"></script>
-<script src="{{asset('assets')}}/plugins/bootstrap/js/wysihtml5-0.3.0.js"></script>
-<script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap-wysihtml5.js"></script>
-<script src="{{asset('assets')}}/plugins/aos-master/aos.js"></script>
-<script src="{{asset('assets')}}/plugins/nice-select/js/jquery.nice-select.min.js"></script>
-<script src="{{asset('assets')}}/js/custom.js"></script>
+<script src="{{asset('public/assets')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/assets')}}/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{asset('public/assets')}}/plugins/bootstrap/js/bootsnav.js"></script>
+<script src="{{asset('public/assets')}}/js/viewportchecker.js"></script>
+<script src="{{asset('public/assets')}}/js/slick.js"></script>
+<script src="{{asset('public/assets')}}/plugins/bootstrap/js/wysihtml5-0.3.0.js"></script>
+<script src="{{asset('public/assets')}}/plugins/bootstrap/js/bootstrap-wysihtml5.js"></script>
+<script src="{{asset('public/assets')}}/plugins/aos-master/aos.js"></script>
+<script src="{{asset('public/assets')}}/plugins/nice-select/js/jquery.nice-select.min.js"></script>
+<script src="{{asset('public/assets')}}/js/custom.js"></script>
 <script>
   $(window).load(function() {
     $(".page_preloader").fadeOut("slow");;
