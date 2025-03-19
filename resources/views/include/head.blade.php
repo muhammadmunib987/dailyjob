@@ -19,15 +19,17 @@
     <link rel="shortcut icon" href="{{asset('assets')}}/img/favicon.png" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/bootstrap/css/bootstrap-select.min.css">
-    <link href="{{asset('assets')}}/plugins/icons/css/icons.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/plugins/animate/animate.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/plugins/bootstrap/css/bootsnav.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets')}}/plugins/nice-select/css/nice-select.css">
-    <link href="{{asset('assets')}}/plugins/aos-master/aos.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/css/style.css" rel="stylesheet">
-    <link href="{{asset('assets')}}/css/responsive.css" rel="stylesheet">
+    @vite([
+        'resources/css/bootstrap.min.css',
+        'resources/css/bootstrap-select.min.css',
+        'resources/css/animate.css',
+        'resources/css/bootsnav.css',
+        'resources/css/nice-select.css',
+        'resources/css/aos.css',
+        'resources/css/style.css',
+        'resources/css/responsive.css'
+    ])
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;display=swap" rel="stylesheet">

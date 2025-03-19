@@ -1118,16 +1118,13 @@ html body .extra-mrg-20 {
 }
 /*------- Global Settings: Background Style ----------*/
 html body .bg-white {
-	background: #ffffff;
-!important
+	background-color: white !important; 
 }
 html body .bg-dark {
-	background: #11161c;
-!important
+	background: #11161c !important;
 }
 html body .bg-light-dark {
-	background: #151c26;
-!important
+	background: #151c26 !important;
 }
 html body .bg-info {
 	background: #01b2ac !important;
@@ -1962,7 +1959,7 @@ html body .label-default {
 	font-size: 16px;
 	padding: 11px 17px;
 	border: none;
-	background-color: red  background-color:red;
+	background-color: red;
 	outline: none;
 }
 .file-upload-button {
@@ -1975,14 +1972,12 @@ html body .label-default {
 	border: none;
 	margin-left: -1px;
 	background-color: red;
-	float: left;
 }
 .jov_search_block_inner{
 	position:relative;
 	z-index:9;
 }
 .custom-file-upload input[type="file"] {
-	-webkit-appearance: none;
 	text-align: left;
 	-webkit-rtl-ordering: left;
 	width: 100%;

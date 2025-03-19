@@ -76,7 +76,7 @@
                     <img class="img-responsive" src="{{ asset('storage/assets/img/company_logo_1.png') }}" alt="">
                   </a>
                 </div>
-                <h1 class="font-14"><a href="{{ route('job_detail', $job->id) }}">{{ substr($job->title ,0,35) }}</a></h1>
+                <h1 class="font-14"><a href="{{ route('job_detail', $job->id) }}">{{ substr($job->title ,0,30) }}</a></h1>
                 <p class="text-muted">{{ substr($job->location ,0,35) }}</p>
               </div>
 
