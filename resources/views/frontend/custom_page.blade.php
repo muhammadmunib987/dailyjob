@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- ======================= Page Title ===================== -->
-<div class="page-title" style="background-image: url('{{ asset("/storage/assets/img/" . $page->banner_image) }}'); background-size: cover; background-position: center;">
+<div class="page-title" style="background-image: url('{{ asset($page->banner_image) }}'); background-size: cover; background-position: center;">
   <div class="container">
     <div class="page-caption">
       <h2>{{ $page->title }}</h2>
@@ -15,7 +15,7 @@
 <!-- ================ Page Content ======================= -->
 <section class="padd-top-80 padd-bot-80">
   <div class="container">
-    <h3 class="mrg-bot-20">{{ $page->title }}</h3>
+    <h1 class="mrg-bot-20">{{ $page->title }}</h>
     <div>{!! $page->content !!}</div>
   </div>
 </section>

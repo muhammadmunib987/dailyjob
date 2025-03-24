@@ -32,7 +32,7 @@
                 <div class="card-body blog-content p-4">
                   <h5 class="card-title"><a href="{{ route('blog.detail', $blog->slug) }}" class="text-dark text-decoration-none">{{ Str::limit(strip_tags($blog->title), 40, '...') }}</a></h5>
                   <p class="blog-meta text-muted small"> | {{ $blog->created_at->format('M d, Y') }}</p>
-                  <p class="card-text text-secondary">{{ Str::limit(strip_tags($blog->short_description), 80, '...') }}</p>
+                  <p class="card-text text-secondary">{!! Str::limit(strip_tags($blog->short_description), 80, '...') !!}</p>
                   <a href="{{ route('blog.detail', $blog->slug) }}" class="btn btn-outline-primary btn-sm mt-2">Read More</a>
                 </div>
               </div>

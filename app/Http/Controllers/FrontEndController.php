@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
-
+use App\Models\JobInfo;
 class FrontEndController extends Controller
 {
     public function blogs()
@@ -19,7 +19,7 @@ class FrontEndController extends Controller
         if (!$blog) {
             abort(404, 'Blog not found');
         }
-
+        $jobs = JobInfo::orderby('id', 'DESC')->limit(5)->get();
         // Fetch recent blogs
         $recentBlogs = Blog::where('id', '!=', $blog->id)
             ->latest()
@@ -32,6 +32,6 @@ class FrontEndController extends Controller
             ->take(6)
             ->get();
 
-        return view('frontend.blog.blog_detail', compact('blog', 'recentBlogs', 'relatedAds'));
+        return view('frontend.blog.blog_detail', compact('blog', 'recentBlogs', 'relatedAds','jobs'));
     }
 }

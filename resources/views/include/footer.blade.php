@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-3 col-sm-4">
         <a href="index.html"><img class="footer-logo" src="{{asset('public/assets')}}/img/logo.png" alt=""></a>
-        <p>Lorem Ipsum is simply dummy text of printing and type setting industry. Lorem Ipsum been industry standard dummy text ever since.</p>
+        <p>DailyJobs.com.pk: Your trusted platform for the latest job opportunities in Pakistan. Connecting talent with top employers, empowering careers, and simplifying the job search process every day.</p>
         <!-- Social Box -->
         <div class="f-social-box">
           <ul>

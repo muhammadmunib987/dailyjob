@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Designation;
@@ -10,6 +11,7 @@ use App\Models\JobType;
 use App\Models\Skill;
 use App\Models\Education;
 use App\Models\JobInfo;
+
 use Illuminate\Support\Facades\Crypt;
 
 class JobController extends Controller
@@ -21,10 +23,15 @@ class JobController extends Controller
     public function home()
     {
         // Get the latest jobs with pagination
-        $jobs = JobInfo::orderby('id', 'DESC')->limit(8)->get();
-        $categories = Category::where('status', 1)->orderBy('title')->get();
+        $jobs = JobInfo::orderby('id', 'DESC')->limit(20)->get();
+        $recentjobs = JobInfo::orderby('id', 'DESC')->limit(5)->get();
+        $blogs = Blog::orderby('id', 'DESC')->limit(6)->get();
+        $topcategories = Category::where('status', 1)->orderBy('title')->get();
+        $recentBlogs = Blog::latest()
+        ->take(5)
+        ->get();
         // Get designations with job count
-        $designations = Designation::select('designations.*')
+        $topdesignations = Designation::select('designations.*')
             ->withCount('jobs') // Assuming a relationship exists
             ->orderBy('id', 'DESC')
             ->limit(8)
@@ -37,7 +44,7 @@ class JobController extends Controller
             'meta_keywords' => 'jobs in Pakistan, government jobs, private jobs, careers, employment',
         ];
     
-        return view('home', compact('jobs', 'categories','designations', 'metaData'));
+        return view('home', compact('jobs', 'topcategories','topdesignations', 'metaData','blogs','recentBlogs','recentjobs'));
     }
     public function categories()
     {

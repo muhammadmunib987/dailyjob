@@ -196,7 +196,7 @@
                     <div class="vertical-job-header">
                         <div class="vrt-job-cmp-logo">
                             <a href="{{ route('job_detail', $job->id) }}">
-                                <img src="{{ asset('assets/img/company_logo_1.png') }}" class="img-responsive" alt="">
+                                <img src="{{ asset('public/assets/img/company_logo_1.png') }}" class="img-responsive" alt="">
                             </a>
                         </div>
                         <h4><a href="{{ route('job_detail', $job->id) }}">{{ $job->title ?? 'Job Title' }}</a></h4>
