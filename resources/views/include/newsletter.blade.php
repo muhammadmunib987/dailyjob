@@ -11,13 +11,21 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
         <div class="newsletter-box text-center">
-          <div class="input-group"> 
-            <span class="input-group-addon"><span class="ti-email theme-cl"></span></span>
-            <input type="text" class="form-control" placeholder="Enter your Email...">
-          </div>
-          <button type="button" class="btn theme-btn btn-radius btn-m">Subscribe</button>
+          <form action="{{ route('subscribe') }}" method="POST">
+            @csrf
+            <div class="input-group">
+              <span class="input-group-addon"><span class="ti-email theme-cl"></span></span>
+              <input type="email" class="form-control" name="email" placeholder="Enter your Email..." required>
+            </div>
+            <button type="submit" class="btn theme-btn btn-radius btn-m">Subscribe</button>
+          </form>
+
+          @if(session('message'))
+          <p style="margin-top: 10px;">{{ session('message') }}</p>
+          @endif
         </div>
       </div>
     </div>
+
   </div>
 </section>

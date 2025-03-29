@@ -102,7 +102,7 @@
                                     <div class="blog-card">
                                         <a href="{{ route('blog.detail', $recentBlog->slug) }}">
                                             <div class="blog-card-content d-flex align-items-center">
-                                                <img src="{{ asset('public/storage/' . ($recentBlog->feature_image ?? 'default_blog.png')) }}" alt="{{ $recentBlog->title }}" class="recent-blog-img">
+                                                <img src="{{ asset( ($recentBlog->feature_image ?? 'default_blog.png')) }}" alt="{{ $recentBlog->title }}" class="recent-blog-img">
                                                 <div class="blog-text">
                                                     <span class="blog-title">{{ Str::limit($recentBlog->title, 20, '...') }}</span>
                                                     <p class="blog-description">{{ Str::limit($recentBlog->short_description, 25, '...') }}</p>

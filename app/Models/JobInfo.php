@@ -26,8 +26,10 @@ class JobInfo extends Model
         'location',
         'job_description',
         'job_requirement',
+        'how_to_apply',
         'external_website_link',
         'apply_via',
+        'document',
         'created_by',
     ];
 

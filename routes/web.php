@@ -8,7 +8,9 @@ use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NewsletterController;
 
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 Route::get('/', [JobController::class, 'home'])->name('home');
 Route::get('/categories', [JobController::class, 'categories'])->name('categories');
 Route::get('/job_detail/{id}', [CustomPageController::class, 'jobDetail'])->name('job_detail');

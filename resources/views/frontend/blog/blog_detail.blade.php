@@ -19,7 +19,7 @@
       <!-- Blog Content -->
       <div class="col-md-9">
         <div class="blog-detail">
-          <img src="{{ asset('public/storage/' . ($blog->feature_image ?? 'default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid rounded">
+          <img src="{{ asset(($blog->feature_image ?? 'default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid rounded">
 
           <h2 class="mt-4">{{ $blog->title }}</h2>
           <p class="blog-meta text-muted">By <strong>{{ $blog->author }}</strong> | {{ $blog->created_at ? $blog->created_at->format('M d, Y') : 'Unpublished' }}</p>
@@ -51,7 +51,7 @@
                   <div class="blog-card">
                     <a href="{{ route('blog.detail', $recentBlog->slug) }}">
                       <div class="blog-card-content d-flex align-items-center">
-                        <img src="{{ asset('public/storage/' . ($recentBlog->feature_image ?? 'default_blog.png')) }}" alt="{{ $recentBlog->title }}" class="recent-blog-img">
+                        <img src="{{ asset(($recentBlog->feature_image ?? 'default_blog.png')) }}" alt="{{ $recentBlog->title }}" class="recent-blog-img">
                         <div class="blog-text">
                           <span class="blog-title">{{ Str::limit($recentBlog->title, 20, '...') }}</span>
                           <p class="blog-description">{{ Str::limit($recentBlog->short_description, 25, '...') }}</p>
@@ -101,7 +101,7 @@
           <div class="card blog-card shadow-lg border-0 rounded-lg">
             <div class="blog-image position-relative">
               <a href="{{ route('blog.detail', $blog->slug) }}">
-                <img src="{{ asset('public/storage/' . ($blog->feature_image ?? 'default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
+                <img src="{{ asset(($blog->feature_image ?? 'default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
               </a>
               <span class="badge bg-primary position-absolute top-0 start-0 m-2">New</span>
             </div>

@@ -42,6 +42,7 @@
           </div>
         </div>
 
+        <!-- Job Description Section -->
         <div class="detail-wrapper">
           <div class="detail-wrapper-header">
             <h4>Job Description</h4>
@@ -51,6 +52,7 @@
           </div>
         </div>
 
+        <!-- Requirements Section -->
         <div class="detail-wrapper">
           <div class="detail-wrapper-header">
             <h4>Requirements</h4>
@@ -58,35 +60,55 @@
           <div class="detail-wrapper-body">
             <ul class="detail-list">
               @foreach(explode("\n", $job->job_requirement) as $requirement)
-                <li>{{ trim($requirement) }}</li>
+              <li>{{ trim($requirement) }}</li>
               @endforeach
             </ul>
           </div>
         </div>
 
+        <!-- How to Apply Section (Only if available) -->
+        @if($job->how_to_apply)
         <div class="detail-wrapper">
           <div class="detail-wrapper-header">
-            <h4>Location</h4>
+            <h4>How to Apply</h4>
           </div>
           <div class="detail-wrapper-body">
-            <iframe src="https://www.google.com/maps?q={{ urlencode($job->location) }}&output=embed" width="100%" height="320" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+            <p>{{ $job->how_to_apply }}</p>
           </div>
         </div>
-      </div>
+        @endif
 
+        <!-- Job Application Form (if exists) -->
+        @if($job->document)
+        <div class="detail-wrapper">
+          <div class="detail-wrapper-header">
+            <h4>Job Application Form</h4>
+          </div>
+          <div class="detail-wrapper-body text-center">
+            <!-- Small PDF Preview -->
+            <iframe src="{{ asset($job->document) }}" width="100%" height="300px" style="border:1px solid #ccc;"></iframe>
+
+            <!-- Download Button -->
+            <div class="text-center mrg-top-10">
+              <a href="{{ asset($job->document) }}" class="btn-job theme-btn job-apply" download>Download Form</a>
+            </div>
+          </div>
+        </div>
+        @endif
+
+      </div>
       <!-- Sidebar -->
       <div class="col-md-4 col-sm-5">
-        <div class="sidebar">
-          <div class="widget-boxed">
-            <div class="widget-boxed-header">
-              <h4><i class="ti-location-pin padd-r-10"></i>Job Overview</h4>
-            </div>
-            <div class="widget-boxed-body">
-              <div class="side-list no-border">
+          <div class="sidebar">
+            <div class="widget-boxed">
+              <div class="widget-boxed-header">
+                <h4><i class="ti-location-pin padd-r-10"></i>Job Overview</h4>
+              </div>
+              <div class="widget-boxed-body">
                 <ul>
                   <li><i class="ti-credit-card padd-r-10"></i>Salary: {{ $job->min_salary }} - {{ $job->max_salary }}</li>
                   @if($job->external_website_link)
-                  <li><i class="ti-world padd-r-10"></i><a href="{{ $job->company_website }}" target="_blank">{{ $job->external_website_link }}</a></li>
+                  <li><i class="ti-world padd-r-10"></i><a href="{{ $job->external_website_link }}" target="_blank">Company Website</a></li>
                   @endif
                   <li><i class="ti-email padd-r-10"></i>{{ $job->job_contact_email }}</li>
                   <li><i class="ti-pencil-alt padd-r-10"></i>Education: {{ optional($job->education)->name ?? 'N/A' }}</li>
@@ -95,51 +117,21 @@
               </div>
             </div>
           </div>
-
-          <div class="widget-boxed">
-            <div class="widget-boxed-header">
-              <h4><i class="ti-time padd-r-10"></i>Opening Hours</h4>
-            </div>
-            <div class="widget-boxed-body">
-              <div class="side-list">
-                <ul>
-                  <li>Monday <span>9 AM - 5 PM</span></li>
-                  <li>Tuesday <span>9 AM - 5 PM</span></li>
-                  <li>Wednesday <span>9 AM - 5 PM</span></li>
-                  <li>Thursday <span>9 AM - 5 PM</span></li>
-                  <li>Friday <span>9 AM - 5 PM</span></li>
-                  <li>Saturday <span>9 AM - 3 PM</span></li>
-                  <li>Sunday <span>Closed</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="widget-boxed">
-            <div class="widget-boxed-header">
-              <h4><i class="ti-time padd-r-10"></i>Location</h4>
-            </div>
-            <div class="widget-boxed-body">
-              <iframe src="https://www.google.com/maps?q={{ urlencode($job->location) }}&output=embed" width="100%" height="360" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-            </div>
-          </div>
+      </div>
+    </div>
+      <!-- Similar Jobs Section -->
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="mrg-bot-30">Similar Jobs</h4>
         </div>
       </div>
-    </div>
-
-    <!-- Similar Jobs Section -->
-    <div class="row">
-      <div class="col-md-12">
-        <h4 class="mrg-bot-30">Similar Jobs</h4>
-      </div>
-    </div>
-    <div class="row">
-      @foreach($similar_jobs as $similar)
+      <div class="row">
+        @foreach($similar_jobs as $similar)
         <div class="col-md-3 col-sm-6">
           <div class="utf_grid_job_widget_area">
             <span class="job-type {{ $similar->job_type }}">{{ ucfirst($similar->job_type) }}</span>
             <div class="u-content">
-              <h5><a href="{{ route('job_detail', $similar->id) }}">{{ substr($job->title ,0,30) }}</a></h5>
+              <h5><a href="{{ route('job_detail', $similar->id) }}">{{ substr($job->title, 0, 30) }}</a></h5>
               <p class="text-muted">{{ $similar->location }}</p>
             </div>
             <div class="utf_apply_job_btn_item">
@@ -147,21 +139,23 @@
             </div>
           </div>
         </div>
-      @endforeach
-    </div>
+        @endforeach
+      </div>
   </div>
 </section>
 
+@include('include.newsletter')
+
 <script>
-function applyNow(method, email, phone, website) {
-  if (method === 'email') {
-    window.location.href = "mailto:" + email;
-  } else if (method === 'whatsapp') {
-    window.location.href = "https://wa.me/" + phone;
-  } else if (method === 'external_website') {
-    window.open(website, '_blank');
+  function applyNow(method, email, phone, website) {
+    if (method === 'email') {
+      window.location.href = "mailto:" + email;
+    } else if (method === 'whatsapp') {
+      window.location.href = "https://wa.me/" + phone;
+    } else if (method === 'external_website') {
+      window.open(website, '_blank');
+    }
   }
-}
 </script>
 
 @endsection

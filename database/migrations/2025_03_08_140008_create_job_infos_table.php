@@ -25,14 +25,16 @@ return new class extends Migration
             $table->unsignedInteger('no_of_position')->nullable()->comment('Number of positions available');
             $table->enum('job_shift', ['morning', 'evening', 'night'])->nullable()->comment('Job shift type');
             $table->enum('gender', ['male', 'female', 'any'])->nullable()->comment('Preferred gender for the job');
-            $table->enum('apply_via', ['email', 'external_website', 'whatsapp'])->nullable()->comment('Apply job via external link or email');
+            $table->enum('apply_via', ['email', 'external_website', 'whatsapp', 'hard_form', 'other'])->nullable()->comment('Apply job via external link or email');
             $table->date('job_expiry_date')->nullable()->comment('Job expiry date');
             $table->string('job_contact_email')->nullable()->comment('Contact email for job applications');
             $table->string('job_contact_no')->nullable()->comment('Contact number for job applications');
             $table->string('location')->nullable()->comment('Job location');
+            $table->string('document')->nullable();
             $table->string('external_website_link')->nullable()->comment('External website link for applying');
             $table->longText('job_description')->nullable()->comment('Detailed job description');
             $table->longText('job_requirement')->nullable()->comment('Job requirements and qualifications');
+            $table->longText('how_to_apply')->nullable()->comment('description about how to apply');
             $table->foreignId('created_by')->nullable()->constrained('users')->comment('User who created the job posting');
             $table->timestamps(); // Created at & Updated at
         });

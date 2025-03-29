@@ -25,7 +25,7 @@
               <div class="card blog-card shadow-lg border-0 rounded-lg">
                 <div class="blog-image position-relative">
                   <a href="{{ route('blog.detail', $blog->slug) }}">
-                    <img src="{{ asset('public/storage/' . ($blog->feature_image ?? 'assets/img/default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
+                    <img src="{{ asset(($blog->feature_image ?? 'assets/img/default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
                   </a>
                   <span class="badge bg-primary position-absolute top-0 start-0 m-2">New</span>
                 </div>
