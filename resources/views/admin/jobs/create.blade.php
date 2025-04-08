@@ -36,6 +36,16 @@
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Job Title</label>
                         <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter job title" >
                     </div>
+                        <!-- Education -->
+                    <div class="mb-4">
+                        <label for="education_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Education Name</label>
+                        <input type="text" name="education_name" id="education_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter education name" >
+                    </div>
+                         <!-- Education -->
+                    <div class="mb-4">
+                        <label for="company_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Compay Name</label>
+                        <input type="text" name="company_name" id="company_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter education name" >
+                    </div>
 
                      <!-- Category Selector (Dynamic) -->
                     <div class="mb-4">

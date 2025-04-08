@@ -30,6 +30,7 @@ class JobInfo extends Model
         'external_website_link',
         'apply_via',
         'document',
+        'company_name',
         'created_by',
     ];
 

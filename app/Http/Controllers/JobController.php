@@ -203,6 +203,7 @@ class JobController extends Controller
             // Prepare payload for insertion
             $payload = [
                 'title' => $validated['title'],
+                'company_name' => $validated['company_name'],
                 'job_description' => $validated['job_description'],
                 'category_id' => $request->category_id,
                 'designation_id' => $request->designation_id,
@@ -236,6 +237,12 @@ class JobController extends Controller
             if ($request->designation_id == 0 && !empty($request->designation_name)) {
                 $designation = Designation::firstOrCreate(['title' => $request->designation_name]);
                 $payload['designation_id'] = $designation->id;
+            }
+
+            // Handle education
+            if ($request->education_name) {
+                $education = Education::firstOrCreate(['name' => $request->education_name]);
+                $payload['education_id'] = $education->id;
             }
 
             // Upload Document
