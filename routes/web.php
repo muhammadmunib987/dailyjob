@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SurveyController;
 
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('counter');
+
+Route::get('/users', function () {
+    return view('user-list');
+})->name('users');
+
 Route::get('/', [SurveyController::class, 'home'])->name('home');
 Route::view('/job_detail', 'frontend.job_detail')->name('job_detail');
 Route::view('/about-us', 'frontend.about_us');
