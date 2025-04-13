@@ -13,16 +13,19 @@
 <!-- ======================= End Page Title ===================== --> 
 
 <!-- ================ Page Content ======================= -->
-<section class="padd-top-80 padd-bot-80">
-  <div class="container">
-    <h1 class="mrg-bot-20">{{ $page->title }}</h>
-    <div>{!! $page->content !!}</div>
+
+  <div class="container-fluid">
+    <!-- <h3 class="mrg-bot-20">{{ $page->title }}</h3> -->
+    {!! $page->content !!}
+
   </div>
-</section>
+
 <!-- ================ End Page Content ======================= --> 
 
 <!-- ================ Newsletter Section ======================= -->
 @include('include.newsletter')
 <!-- ================ End Newsletter Section ======================= -->
-
+<style>
+  
+</style>
 @endsection

@@ -13,7 +13,7 @@ use App\Http\Controllers\NewsletterController;
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 Route::get('/', [JobController::class, 'home'])->name('home');
 Route::get('/categories', [JobController::class, 'categories'])->name('categories');
-Route::get('/job_detail/{id}', [CustomPageController::class, 'jobDetail'])->name('job_detail');
+Route::get('/job_detail/{slug}', [CustomPageController::class, 'jobDetail'])->name('job_detail');
 Route::get('/page/{slug}', [CustomPageController::class, 'show'])->name('page.show');
 Route::get('/search-jobs/{id?}/{type?}', [JobController::class, 'searchJobs'])->name('search.jobs');
 Route::get('/find-jobs', [JobController::class, 'searchJobs'])->name('job.search');

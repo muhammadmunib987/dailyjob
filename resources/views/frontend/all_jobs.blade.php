@@ -195,11 +195,11 @@
                 <div class="vertical-job-card">
                     <div class="vertical-job-header">
                         <div class="vrt-job-cmp-logo">
-                            <a href="{{ route('job_detail', $job->id) }}">
+                            <a href="{{ route('job_detail', $job->slug) }}">
                                 <img src="{{ asset('public/assets/img/company_logo_1.png') }}" class="img-responsive" alt="">
                             </a>
                         </div>
-                        <h4><a href="{{ route('job_detail', $job->id) }}">{{ $job->title ?? 'Job Title' }}</a></h4>
+                        <h4><a href="{{ route('job_detail', $job->slug) }}">{{ $job->title ?? 'Job Title' }}</a></h4>
                         <span class="com-tagline">{{ $job->category->title ?? 'Software Development' }}</span>
                         <span class="pull-right vacancy-no">No. <span class="v-count">{{ $job->no_of_position ?? 1 }}</span></span>
                     </div>
@@ -225,7 +225,7 @@
                             <div class="col-md-3 col-sm-12 col-xs-12">
                                 <div class="vrt-job-act">
                                     <a href="#" data-toggle="modal" data-target="#apply-job" class="btn-job theme-btn job-apply">Apply Now</a>
-                                    <a href="{{ route('job_detail', $job->id) }}" class="btn-job light-gray-btn">View Job</a>
+                                    <a href="{{ route('job_detail', $job->slug) }}" class="btn-job light-gray-btn">View Job</a>
                                 </div>
                             </div>
                         </div>

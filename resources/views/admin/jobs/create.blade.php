@@ -199,6 +199,22 @@
                             <input type="url" name="external_website_link" id="external_website_link" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" placeholder="Enter external job link">
                         </div>
 
+                        
+                        <!-- SEO Meta Fields -->
+                        <div class="mb-4">
+                            <label for="meta_title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Title</label>
+                            <input type="text" name="meta_title" id="meta_title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="meta_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Description</label>
+                            <textarea name="meta_description" id="meta_description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="meta_keywords" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Keywords</label>
+                            <input type="text" name="meta_keywords" id="meta_keywords" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        </div>
                       
                         </div>
 

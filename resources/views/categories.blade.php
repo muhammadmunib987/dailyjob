@@ -17,7 +17,6 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="heading">
           <h2>Job Categories</h2>
-          <p>Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry standard dummy text ever since when unknown printer took a galley.</p>
         </div>
       </div>
     </div>
@@ -29,11 +28,11 @@
           <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($designation->id), 'type' => 'designation']) }}" title="{{ $designation->title }}">
             <div class="utf_category_box_area">
               <div class="utf_category_desc">
-                <div class="utf_category_icon">
-                  <i class="{{ $designation->icon }}" aria-hidden="true"></i>
-                </div>
+                <!-- <div class="utf_category_icon">
+                  <i class="icon-bargraph" aria-hidden="true"></i>
+                </div> -->
                 <div class="category-detail utf_category_desc_text">
-                  <h4>{{ $designation->title }}</h4>
+                  <h1 style="font-size:22px">{{ $designation->title }}</h1>
                   <p>{{ $designation->jobs_count ?? 0 }} Jobs</p>
                 </div>
               </div>

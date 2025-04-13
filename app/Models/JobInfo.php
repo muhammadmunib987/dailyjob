@@ -9,6 +9,7 @@ class JobInfo extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        'slug',
         'category_id',
         'designation_id',
         'job_type_id',
@@ -32,6 +33,9 @@ class JobInfo extends Model
         'document',
         'company_name',
         'created_by',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
 
     public function skills(){

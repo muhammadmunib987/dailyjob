@@ -73,10 +73,10 @@
                 @foreach($jobs as $job)
                 <div class="col-12 col-md-6 col-lg-12">
                   <div class="job-card">
-                    <a href="{{ route('job_detail', $job->id) }}">
+                    <a href="{{ route('job_detail', $job->slug) }}">
                       <div class="job-content">
                         <span class="job-title">{{ Str::limit($job->title, 25, '...') }}</span>
-                        <p class="job-description">{{ Str::limit($job->job_description, 40, '...') }}</p>
+                        <!-- <p class="job-description">{{ Str::limit($job->job_description, 40, '...') }}</p> -->
                         <p class="job-date">{{ $job->created_at->format('M d, Y') }}</p>
                       </div>
                     </a>

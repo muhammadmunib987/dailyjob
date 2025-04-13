@@ -20,15 +20,19 @@ class CustomPageController extends Controller
         return view('frontend.custom_page', compact('page', 'metaData'));
     }
     
-    public function jobDetail($id) {
-        $job = JobInfo::with('skills','jobType')->where('id', $id)->firstOrFail();
-        
+    public function jobDetail($slug) {
+        $job = JobInfo::with('skills','jobType')->where('slug', $slug)->firstOrFail();
+        $metaData = [
+            'meta_title' => $job->meta_title ?? config('constants.meta_title'),
+            'meta_description' => $job->meta_description ?? config('constants.meta_description'),
+            'meta_keywords' => $job->meta_keywords ?? config('constants.meta_keywords'),
+        ];
         $similar_jobs = JobInfo::
         where('designation_id',$job->designation_id)
         ->where('id', '!=', $job->id) // Exclude the current job
         ->limit(4) // Limit results
         ->get();
 
-        return view('frontend.job_detail', compact('job','similar_jobs'));
+        return view('frontend.job_detail', compact('job','similar_jobs','metaData'));
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Designation;
 use App\Models\Contact;
+use Illuminate\Support\Str;
 use App\Models\JobType;
 use App\Models\Skill;
 use App\Models\Education;
@@ -203,7 +204,8 @@ class JobController extends Controller
             // Prepare payload for insertion
             $payload = [
                 'title' => $validated['title'],
-                'company_name' => $validated['company_name'],
+                'slug' => Str::slug($validated['title']),
+                'company_name' => $request->company_name,
                 'job_description' => $validated['job_description'],
                 'category_id' => $request->category_id,
                 'designation_id' => $request->designation_id,
@@ -225,6 +227,9 @@ class JobController extends Controller
                 'external_website_link' => $request->external_website_link,
                 'apply_via' => $request->apply_via,
                 'created_by' => auth()->user()->id,
+                'meta_title' => $request->meta_title,
+                'meta_description' => $request->meta_description,
+                'meta_keywords' => $request->meta_keywords,
             ];
 
             // Handle Category
@@ -235,7 +240,7 @@ class JobController extends Controller
 
             // Handle Designation
             if ($request->designation_id == 0 && !empty($request->designation_name)) {
-                $designation = Designation::firstOrCreate(['title' => $request->designation_name]);
+                $designation = Designation::firstOrCreate(['title' => $request->designation_name,'category_id' => $payload['category_id']]);
                 $payload['designation_id'] = $designation->id;
             }
 

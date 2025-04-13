@@ -37,6 +37,10 @@ return new class extends Migration
             $table->longText('job_requirement')->nullable()->comment('Job requirements and qualifications');
             $table->longText('how_to_apply')->nullable()->comment('description about how to apply');
             $table->foreignId('created_by')->nullable()->constrained('users')->comment('User who created the job posting');
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps(); // Created at & Updated at
         });
     }

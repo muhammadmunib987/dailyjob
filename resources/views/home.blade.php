@@ -77,7 +77,7 @@
                                 <td><i class="ti-location-pin"></i> {{ Str::limit($job->location, 30) }}</td>
                                 <td><i class="ti-credit-card"></i> {{$job->job_expiry_date}}</td>
                                 <td>
-                                    <a href="{{ route('job_detail', $job->id) }}" class="btn theme-btn btn-m">View Detail</a>
+                                    <a href="{{ route('job_detail', $job->slug) }}" class="btn theme-btn btn-m">View Detail</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -124,10 +124,10 @@
                                 @foreach($recentjobs as $job)
                                 <div class="col-12 col-md-6 col-lg-12">
                                     <div class="job-card">
-                                        <a href="{{ route('job_detail', $job->id) }}">
+                                        <a href="{{ route('job_detail', $job->slug) }}">
                                             <div class="job-content">
                                                 <span class="job-title">{{ Str::limit($job->title, 25, '...') }}</span>
-                                                <p class="job-description">{{ Str::limit($job->job_description, 40, '...') }}</p>
+                                                <!-- <p class="job-description">{{ Str::limit($job->job_description, 40, '...') }}</p> -->
                                                 <p class="job-date">{{ $job->created_at->format('M d, Y') }}</p>
                                             </div>
                                         </a>
@@ -152,7 +152,6 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="heading">
           <h2>Job Categories</h2>
-          <p>Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry standard dummy text ever since when unknown printer took a galley.</p>
         </div>
       </div>
     </div>
@@ -164,11 +163,11 @@
           <a href="{{ route('search.jobs', ['id' => Crypt::encrypt($designation->id), 'type' => 'designation']) }}" title="{{ $designation->title }}">
             <div class="utf_category_box_area">
               <div class="utf_category_desc">
-                <div class="utf_category_icon">
+                <!-- <div class="utf_category_icon">
                   <i class="icon-bargraph" aria-hidden="true"></i>
-                </div>
+                </div> -->
                 <div class="category-detail utf_category_desc_text">
-                  <h1 class="font-14">{{ $designation->title }}</h1>
+                  <h1 style="font-size:22px">{{ $designation->title }}</h1>
                   <p>{{ $designation->jobs_count ?? 0 }} Jobs</p>
                 </div>
               </div>
@@ -193,7 +192,6 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="heading">
           <h2>Latest Blog</h2>
-          <p>Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry standard dummy text ever since when unknown printer took a galley.</p>
         </div>
       </div>
     </div>
@@ -202,21 +200,21 @@
         <div class="row">
           @foreach($blogs as $blog)
           <div class="col-md-4 mb-4">
-            <div class="card blog-card shadow-lg border-0 rounded-lg">
-              <div class="blog-image position-relative">
-                <a href="{{ route('blog.detail', $blog->slug) }}">
-                  <img src="{{ asset('public/storage/' . ($blog->feature_image ?? 'assets/img/default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
-                </a>
-                <span class="badge bg-primary position-absolute top-0 start-0 m-2">New</span>
-              </div>
-              <div class="card-body blog-content p-4">
-                <h5 class="card-title"><a href="{{ route('blog.detail', $blog->slug) }}" class="text-dark text-decoration-none">{{ Str::limit(strip_tags($blog->title), 40, '...') }}</a></h5>
-                <p class="blog-meta text-muted small"> | {{ $blog->created_at->format('M d, Y') }}</p>
-                <p class="card-text text-secondary">{!! Str::limit(strip_tags($blog->short_description), 80, '...') !!}</p>
-                <a href="{{ route('blog.detail', $blog->slug) }}" class="btn btn-outline-primary btn-sm mt-2">Read More</a>
+              <div class="card blog-card shadow-lg border-0 rounded-lg">
+                <div class="blog-image position-relative">
+                  <a href="{{ route('blog.detail', $blog->slug) }}">
+                    <img src="{{ asset(($blog->feature_image ?? 'assets/img/default_blog.png')) }}" alt="{{ $blog->title }}" class="img-fluid">
+                  </a>
+                  <span class="badge bg-primary position-absolute top-0 start-0 m-2">New</span>
+                </div>
+                <div class="card-body blog-content p-4">
+                  <h5 class="card-title"><a href="{{ route('blog.detail', $blog->slug) }}" class="text-dark text-decoration-none">{{ Str::limit(strip_tags($blog->title), 40, '...') }}</a></h5>
+                  <p class="blog-meta text-muted small"> | {{ $blog->created_at->format('M d, Y') }}</p>
+                  <p class="card-text text-secondary">{!! Str::limit(strip_tags($blog->short_description), 80, '...') !!}</p>
+                  <a href="{{ route('blog.detail', $blog->slug) }}" class="btn btn-outline-primary btn-sm mt-2">Read More</a>
+                </div>
               </div>
             </div>
-          </div>
           @endforeach
         </div>
       </div>
