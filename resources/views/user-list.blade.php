@@ -15,6 +15,7 @@
         <button>Back to Counter</button>
     </a>
 
+    <script src="//unpkg.com/alpinejs" defer></script>
     @livewireScripts
 </body>
 </html>
