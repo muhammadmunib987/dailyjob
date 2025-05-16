@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\CustomPageController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactController; 
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NewsletterController;

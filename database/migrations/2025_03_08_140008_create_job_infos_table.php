@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_infos', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->string('title')->comment('Job title');
-            $table->string('company_name')->comment('company name');
+            $table->string('company_name')->comment('company name')->nullable();
             $table->foreignId('category_id')->nullable()->constrained('categories')->comment('Foreign key for job category');
             $table->foreignId('designation_id')->nullable()->constrained('designations')->comment('Foreign key for job designation');
             $table->foreignId('job_type_id')->nullable()->constrained('job_types')->comment('Foreign key for job type');

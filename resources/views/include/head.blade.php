@@ -14,9 +14,10 @@
     <meta property="og:image" content="{{ asset('assets/img/job-banner.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
-
+        
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('public/assets')}}/img/favicon.png" />
+    <meta name="google-site-verification" content="U_-hmlJ9Xvkl8oAHHT-caqmZp8xPhlBJbgBkulyk8FY" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{asset('public/assets')}}/plugins/bootstrap/css/bootstrap.min.css">

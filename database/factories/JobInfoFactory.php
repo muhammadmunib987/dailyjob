@@ -19,6 +19,7 @@ class JobInfoFactory extends Factory
     
         return [
             'title' => $this->faker->jobTitle,
+            'slug' => str_replace(' ','-',$this->faker->jobTitle),
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory()->create()->id,
             'designation_id' => rand(1, 3),
             'job_type_id' => JobType::inRandomOrder()->first()->id ?? JobType::factory()->create()->id,
