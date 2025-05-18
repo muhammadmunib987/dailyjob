@@ -1,10 +1,9 @@
-
 name: Deploy Laravel to cPanel
 
 on:
   push:
     branches:
-      - main  # Change to your branch if needed
+      - main  # or your branch name
 
 jobs:
   deploy:
@@ -19,20 +18,22 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan yourdomain.com >> ~/.ssh/known_hosts
+          ssh-keyscan brightholiday.co.uk >> ~/.ssh/known_hosts
 
-      - name: Deploy to cPanel
+      - name: Deploy via SSH
         run: |
-          ssh -i ~/.ssh/id_rsa username@yourdomain.com << 'EOF'
+          ssh -i ~/.ssh/id_rsa brigpksi@brightholiday.co.uk << 'EOF'
             cd /home/brigpksi/public_html/testdev
 
-            # Optional: pull latest code if git is available, or copy manually via scp
-            rm -rf *
-            git clone https://github.com/your-username/your-repo.git .
-            
-            # Set permissions
-            chmod -R 755 .
-            chown -R username:username .
+            # OPTIONAL: clear existing files (careful!)
+            # rm -rf *
+
+            # Pull code
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/muhammadmunib987/dailyjob.git .
+            else
+              git pull origin main
+            fi
 
             # Laravel setup
             composer install --no-dev --optimize-autoloader
