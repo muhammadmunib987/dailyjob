@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [SurveyController::class, 'home'])->name('home');
+Route::view('/firbase', 'firbase_notification')->name('firbase_notification');
+Route::get('/send-notification', [SurveyController::class, 'sendTestNotification'])->name('sendNotification');
 // Route::get('/survey', [SurveyController::class, 'showForm'])->name('survey.form');
 // Route::post('/survey', [SurveyController::class, 'submitForm'])->name('survey.submit');
 

@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UserSurvey;
 use App\Models\Post;
-
+use App\Services\FCMService;
 class SurveyController extends Controller
 {
+
+    public function sendTestNotification(FCMService $fcm){
+        $deviceToken = 'dlnj7m6q9Y7n6x3v2hS-mN:APA91bEf6kUh3N1-BbfeuV8wFPG78tVoFP4Cna9gkdOlI_0atz7EF-ZP7UZQDbfdb3joy9LRJ75y-7mtcziRHZmiKj5TahgPXURQHzsgUgN9OgSa0hDsVoc'; //firbase token
+        $title = 'Hello';
+        $body = 'This is a test notification';
+
+        $response = $fcm->sendNotification($deviceToken, $title, $body);
+
+        return response()->json($response);
+    }
     public function home()
     {
         return view('home');
