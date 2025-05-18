@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     
-    steps:
+    steps: 
     - uses: actions/checkout@v3  # Fetches latest code from repository
     
     - name: Deploy to cPanel
