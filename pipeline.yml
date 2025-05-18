@@ -1,1 +1,43 @@
 
+name: Deploy Laravel to cPanel
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan yourdomain.com >> ~/.ssh/known_hosts
+
+      - name: Deploy to cPanel
+        run: |
+          ssh -i ~/.ssh/id_rsa username@yourdomain.com << 'EOF'
+            cd /home/brigpksi/public_html/testdev
+
+            # Optional: pull latest code if git is available, or copy manually via scp
+            rm -rf *
+            git clone https://github.com/your-username/your-repo.git .
+            
+            # Set permissions
+            chmod -R 755 .
+            chown -R username:username .
+
+            # Laravel setup
+            composer install --no-dev --optimize-autoloader
+            cp .env.example .env
+            php artisan key:generate
+            php artisan config:cache
+            php artisan migrate --force
+          EOF
