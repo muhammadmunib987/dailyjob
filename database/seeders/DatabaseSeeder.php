@@ -17,7 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(DesignationSeeder::class);
         $this->call(SkillSeeder::class);
-  
+        $this->call(PageSeeder::class);
+        $this->call(JobTypeSeeder::class);  
+        $this->call(EducationSeeder::class);
+        $this->call(JobInfoSeeder::class);  
+        $this->call(BlogSeeder::class);  
 
         // User::factory()->create([
         //     'name' => 'Test User',

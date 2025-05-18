@@ -7,21 +7,50 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+             @if(session('success'))
+            <div class="alert alert-danger">
+                {{ session('success') }}
+            </div>
+            @endif
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('jobs.store') }}" method="POST">
-                        @csrf
+                <form action="{{ route('jobs.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
                     <!-- Job Title -->
                     <div class="mb-4">
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Job Title</label>
-                        <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter job title" required>
+                        <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter job title" >
+                    </div>
+                        <!-- Education -->
+                    <div class="mb-4">
+                        <label for="education_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Education Name</label>
+                        <input type="text" name="education_name" id="education_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter education name" >
+                    </div>
+                         <!-- Education -->
+                    <div class="mb-4">
+                        <label for="company_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Compay Name</label>
+                        <input type="text" name="company_name" id="company_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter education name" >
                     </div>
 
                      <!-- Category Selector (Dynamic) -->
                     <div class="mb-4">
                     <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
-                    <select name="category_id" id="category_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                    <select name="category_id" id="category_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" >
                         <option value="">Select Category</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -34,7 +63,7 @@
                     <!-- Designation Selector (Dynamic) -->
                     <div class="mb-4">
                     <label for="designation_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Designation</label>
-                    <select name="designation_id" id="designation_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" required>
+                    <select name="designation_id" id="designation_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" >
                         <option value="">Select Designation</option>
                         @foreach($designations as $designation)
                             <option value="{{ $designation->id }}">{{ $designation->title }}</option>
@@ -67,12 +96,18 @@
                         <!-- Location -->
                            <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
-                            <input type="text" name="location" id="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter location" required>
+                            <input type="text" name="location" id="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter location" >
                         </div>
                         <!-- Job Description -->
                         <div class="mb-4">
                             <label for="job_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Job Description</label>
                             <textarea name="job_description" id="job_description" class="summernote"></textarea>
+                        </div>
+
+                        <!-- Job Description -->
+                        <div class="mb-4">
+                            <label for="how_to_apply" class="block text-sm font-medium text-gray-700 dark:text-gray-300">How To Apply</label>
+                            <textarea name="how_to_apply" id="how_to_apply" class="summernote"></textarea>
                         </div>
 
                         <!-- Job Requirement -->
@@ -85,29 +120,29 @@
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label for="min_experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Min Experience (Years)</label>
-                                <input type="number" name="min_experience" id="min_experience" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" required>
+                                <input type="number" name="min_experience" id="min_experience" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
                             </div>
                             <div>
                                 <label for="max_experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Max Experience (Years)</label>
-                                <input type="number" name="max_experience" id="max_experience" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" required>
+                                <input type="number" name="max_experience" id="max_experience" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
                             </div>
                         </div>
                                  <!-- salary -->
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label for="min_salary" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Min Salary</label>
-                                <input type="number" name="min_salary" id="min_salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" required>
+                                <input type="number" name="min_salary" id="min_salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
                             </div>
                             <div>
                                 <label for="max_salary" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Max Salary</label>
-                                <input type="number" name="max_salary" id="max_salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" required>
+                                <input type="number" name="max_salary" id="max_salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
                             </div>
                         </div>
                            <!-- Experience Fields -->
                            <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label for="no_of_position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">No Of Position</label>
-                                <input type="number" name="no_of_position" id="no_of_position" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" required>
+                                <input type="number" name="no_of_position" id="no_of_position" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
                             </div>
                             <div>
                                 <label for="max_experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
@@ -133,13 +168,54 @@
 
                             <div>
                                 <label for="no_of_position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Employeer Email </label>
-                                <input type="email" name="job_contact_email" id="job_contact_email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
+                                <input type="email" name="job_contact_email" id="job_contact_email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm"  placeholder="Enter contact email" >
+                            </div>
+                            <div>
+                                <label for="document" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Document </label>
+                                <input type="file" name="document" id="document" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm"  placeholder="Enter contact email" >
                             </div>
 
-                            <!-- <div>
-                                <label for="no_of_position" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Job Expiry Date </label>
-                                <input type="date" name="job_expiry_date" id="job_expiry_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" >
-                            </div> -->
+                                 <!-- Job Contact Number -->
+                        <div class="mb-4">
+                            <label for="job_contact_no" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Employer Contact Number</label>
+                            <input type="text" name="job_contact_no" id="job_contact_no" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" placeholder="Enter contact number">
+                        </div>
+                          <!-- Apply Via -->
+                          <div class="mb-4">
+                            <label for="apply_via" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Apply Via</label>
+                            <select name="apply_via" id="apply_via" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" >
+                                <option value="">Select Apply Method</option>
+                                <option value="external_website">Website</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone Number</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <input type="text" name="external_website_link" id="external_website_link" class="mt-2 hidden w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter Website Link">
+                            <input type="text" name="job_contact_no" id="job_contact_no" class="mt-2 hidden w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter Contact Number">
+                        </div>
+                        <!-- External Website Link -->
+                        <div class="mb-4">
+                            <label for="external_website_link" class="block text-sm font-medium text-gray-700 dark:text-gray-300">External Website Link</label>
+                            <input type="url" name="external_website_link" id="external_website_link" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 sm:text-sm" placeholder="Enter external job link">
+                        </div>
+
+                        
+                        <!-- SEO Meta Fields -->
+                        <div class="mb-4">
+                            <label for="meta_title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Title</label>
+                            <input type="text" name="meta_title" id="meta_title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="meta_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Description</label>
+                            <textarea name="meta_description" id="meta_description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="meta_keywords" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Meta Keywords</label>
+                            <input type="text" name="meta_keywords" id="meta_keywords" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        </div>
+                      
                         </div>
 
                         <!-- Submit Button -->

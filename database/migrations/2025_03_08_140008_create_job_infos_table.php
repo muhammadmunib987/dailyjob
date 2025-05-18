@@ -14,22 +14,33 @@ return new class extends Migration
         Schema::create('job_infos', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->string('title')->comment('Job title');
-            $table->foreignId('category_id')->constrained('categories')->comment('Foreign key for job category');
-            $table->foreignId('designation_id')->constrained('designations')->comment('Foreign key for job designation');
-            $table->foreignId('job_type_id')->constrained('job_types')->comment('Foreign key for job type');
-            $table->tinyInteger('min_experience')->unsigned()->comment('Minimum experience required in years');
-            $table->tinyInteger('max_experience')->unsigned()->comment('Maximum experience required in years');
+            $table->string('company_name')->comment('company name')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->comment('Foreign key for job category');
+            $table->foreignId('designation_id')->nullable()->constrained('designations')->comment('Foreign key for job designation');
+            $table->foreignId('job_type_id')->nullable()->constrained('job_types')->comment('Foreign key for job type');
+            $table->foreignId('education_id')->nullable()->constrained('education')->comment('Foreign key for education');
+            $table->tinyInteger('min_experience')->unsigned()->nullable()->comment('Minimum experience required in years');
+            $table->tinyInteger('max_experience')->unsigned()->nullable()->comment('Maximum experience required in years');
             $table->decimal('min_salary', 10, 2)->nullable()->comment('Minimum salary offered');
             $table->decimal('max_salary', 10, 2)->nullable()->comment('Maximum salary offered');
-            $table->unsignedInteger('no_of_position')->comment('Number of positions available');
-            $table->enum('job_shift', ['morning', 'evening', 'night'])->comment('Job shift type');
-            $table->enum('gender', ['male', 'female', 'any'])->comment('Preferred gender for the job');
-            $table->date('job_expiry_date')->comment('Job expiry date');
-            $table->string('job_contact_email')->comment('Contact email for job applications');
-            $table->string('location')->comment('Job location');
-            $table->longText('job_description')->comment('Detailed job description');
-            $table->longText('job_requirement')->comment('Job requirements and qualifications');
-            $table->foreignId('created_by')->constrained('users')->comment('User who created the job posting');
+            $table->unsignedInteger('no_of_position')->nullable()->comment('Number of positions available');
+            $table->enum('job_shift', ['morning', 'evening', 'night'])->nullable()->comment('Job shift type');
+            $table->enum('gender', ['male', 'female', 'any'])->nullable()->comment('Preferred gender for the job');
+            $table->enum('apply_via', ['email', 'external_website', 'whatsapp', 'hard_form', 'other'])->nullable()->comment('Apply job via external link or email');
+            $table->date('job_expiry_date')->nullable()->comment('Job expiry date');
+            $table->string('job_contact_email')->nullable()->comment('Contact email for job applications');
+            $table->string('job_contact_no')->nullable()->comment('Contact number for job applications');
+            $table->string('location')->nullable()->comment('Job location');
+            $table->string('document')->nullable();
+            $table->string('external_website_link')->nullable()->comment('External website link for applying');
+            $table->longText('job_description')->nullable()->comment('Detailed job description');
+            $table->longText('job_requirement')->nullable()->comment('Job requirements and qualifications');
+            $table->longText('how_to_apply')->nullable()->comment('description about how to apply');
+            $table->foreignId('created_by')->nullable()->constrained('users')->comment('User who created the job posting');
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps(); // Created at & Updated at
         });
     }

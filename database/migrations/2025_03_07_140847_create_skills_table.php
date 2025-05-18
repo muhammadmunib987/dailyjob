@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('status');
+            $table->integer('status')->default(1);
             $table->foreignId('designation_id')->constrained('designations')->comment('Foreign key for job designation');
             $table->timestamps();
         });

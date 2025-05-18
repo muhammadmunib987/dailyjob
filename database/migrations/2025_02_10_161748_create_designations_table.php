@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories')->comment('Foreign key for job category');
-            $table->string('title');
-            $table->string('image');
-            $table->string('status');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->comment('Foreign key for job category');
+            $table->string('title')->nullable();
+            $table->string('image')->nullable();            
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -16,28 +16,28 @@ class CategorySeeder extends Seeder
             [
                 'title' => 'Information Technology',
                 'image' => 'it.jpg', // Ensure you have an image file in public storage
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'title' => 'Healthcare',
                 'image' => 'healthcare.jpg',
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'title' => 'Finance',
                 'image' => 'finance.jpg',
-                'status' => 'inactive',
+                'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'title' => 'Education',
                 'image' => 'education.jpg',
-                'status' => 'active',
+                'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
