@@ -2,52 +2,25 @@ name: Deploy Laravel to cPanel
 
 on:
   push:
-    branches: [ main ]  # Change this to match your main branch name
+    branches: [ main ]  # Triggers deployment when changes are pushed to main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
-      
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'  # Change to match your PHP version
-        
-    - name: Install Composer dependencies
-      run: composer install --no-dev --optimize-autoloader --no-interaction
-      
-    - name: Generate key
-      run: php artisan key:generate --force
-      
-    - name: Create .env file
-      run: |
-        cp .env.example .env
-        sed -i 's/APP_ENV=local/APP_ENV=production/' .env
-        sed -i 's/APP_DEBUG=true/APP_DEBUG=false/' .env
-        # Add other environment variables if needed
-    
-    - name: Clear and cache config
-      run: |
-        php artisan config:clear
-        php artisan config:cache
-        php artisan route:cache
-        php artisan view:cache
+    - uses: actions/checkout@v3  # Fetches latest code from repository
     
     - name: Deploy to cPanel
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ${{ secrets.CPANEL_HOST }}  # Can be your domain or shared IP
-        username: ${{ secrets.CPANEL_USERNAME }}  
-        password: ${{ secrets.CPANEL_PASSWORD }}  
-        server-dir: /home/brigpksi/consultantpanels.allahhootravels.co.uk/demo/  # Updated path
+        server: ${{ secrets.CPANEL_HOST }}  # FTP host (can be domain or shared IP)
+        username: ${{ secrets.CPANEL_USERNAME }}  # cPanel username
+        password: ${{ secrets.CPANEL_PASSWORD }}  # cPanel password
+        server-dir: /home/brigpksi/consultantpanels.allahhootravels.co.uk/demo/  # Destination folder
         exclude: |
           **/.git*
           **/.git*/**
-          **/node_modules/**
-          **/vendor/**
           .env.example
           README.md
           phpunit.xml
