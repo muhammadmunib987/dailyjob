@@ -9,11 +9,18 @@
     <meta name="keywords" content="{{ $metaData['meta_keywords'] ?? 'jobs, careers, employment' }}">
 
     <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
-    <meta property="og:title" content="{{ $metaData['meta_title'] ?? 'DailyJobs - Find Latest Jobs in Pakistan' }}">
-    <meta property="og:description" content="{{ $metaData['meta_description'] ?? 'Find the latest job opportunities in Pakistan and apply today.' }}">
-    <meta property="og:image" content="{{ asset('assets/img/job-banner.jpg') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website">
+    {{-- layouts/partials/header.blade.php --}}
+        <meta property="og:title" content="{{ $meta_title ?? 'DailyJobs - Find Latest Jobs in Pakistan' }}">
+        <meta property="og:description" content="{{ $meta_description ?? 'Find the latest job opportunities in Pakistan and apply today.' }}">
+        <meta property="og:image" content="https://dailyjobs.com.pk/public/assets/img/logo.png">
+        <meta property="og:url" content="{{ $meta_url ?? url()->current() }}">
+        <meta property="og:type" content="website">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $meta_title ?? 'DailyJobs - Find Latest Jobs in Pakistan' }}">
+        <meta name="twitter:description" content="{{ $meta_description ?? 'Find the latest job opportunities in Pakistan and apply today.' }}">
+        <meta name="twitter:image" content="https://dailyjobs.com.pk/public/assets/img/logo.png">
+
         
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('public/assets')}}/img/favicon.png" />

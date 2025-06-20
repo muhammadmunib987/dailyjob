@@ -148,11 +148,31 @@
           <div class="utf_grid_job_widget_area">
             <span class="job-type {{ $similar->job_type }}">{{ ucfirst($similar->job_type) }}</span>
             <div class="u-content">
-              <h5><a href="{{ route('job_detail', $similar->slug) }}">{{ substr($job->title, 0, 30) }}</a></h5>
+              <h3 style="font-size:14px"><a href="{{ route('job_detail', $similar->slug) }}">{{ substr($similar->title, 0, 40) }}</a></h3>
               <p class="text-muted">{{ $similar->location }}</p>
             </div>
+
             <div class="utf_apply_job_btn_item">
               <a href="{{ route('job_detail', $similar->slug) }}" class="btn job-browse-btn btn-radius br-light">Apply Now</a>
+            @php
+              $meta_title = $job->title . ' – ' . ($job->company_name ?? 'DailyJobs');
+              $meta_description = \Illuminate\Support\Str::limit(strip_tags($job->job_description), 150);
+              $meta_url = url()->current();
+
+              // Define for sharing links
+              $jobUrl = $meta_url;
+              $jobTitle = $meta_title;
+          @endphp
+
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($jobUrl) }}" 
+              target="_blank" 
+              class="btn job-browse-btn btn-radius br-light">Share on Facebook</a>
+
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($jobUrl) }}&title={{ $jobTitle }}" 
+              target="_blank" 
+              class="btn job-browse-btn btn-radius br-light">Share on LinkedIn</a>
+
+
             </div>
           </div>
         </div>

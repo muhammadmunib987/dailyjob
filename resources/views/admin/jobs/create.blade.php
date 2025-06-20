@@ -187,7 +187,7 @@
                                 <option value="">Select Apply Method</option>
                                 <option value="external_website">Website</option>
                                 <option value="email">Email</option>
-                                <option value="phone">Phone Number</option>
+                                <option value="whatsapp">Phone Number</option>
                                 <option value="other">Other</option>
                             </select>
                             <input type="text" name="external_website_link" id="external_website_link" class="mt-2 hidden w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Enter Website Link">

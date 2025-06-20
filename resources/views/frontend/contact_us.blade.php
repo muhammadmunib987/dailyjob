@@ -35,6 +35,10 @@
             <input type="email" class="form-control" name="email" placeholder="Email" required />
           </div>
           <div class="col-md-12 col-sm-12">
+            <label>Phone Number:</label>
+            <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number" required />
+          </div>
+          <div class="col-md-12 col-sm-12">
             <label>Subject:</label>
             <input type="text" class="form-control" name="subject" placeholder="Subject" required />
           </div>
