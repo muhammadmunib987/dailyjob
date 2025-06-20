@@ -10,6 +10,24 @@ use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NewsletterController;
 
+
+use App\Http\Controllers\FirebaseUserController;
+
+Route::get('firebase', [FirebaseUserController::class, 'index'])->name('firebase.index');
+Route::get('firebase/create', [FirebaseUserController::class, 'create']);
+Route::post('firebase/store', [FirebaseUserController::class, 'store']);
+
+Route::get('firebase/interests/create', [FirebaseUserController::class, 'createInterest']);
+Route::post('firebase/interests/store', [FirebaseUserController::class, 'storeInterest']);
+
+Route::get('firebase/interests/dummy', [FirebaseUserController::class, 'createDummyInterests']); // only once
+Route::get('firebase/edit/{id}', [FirebaseUserController::class, 'edit']);
+Route::post('firebase/update/{id}', [FirebaseUserController::class, 'update']);
+Route::delete('firebase/delete/{id}', [FirebaseUserController::class, 'destroy']);
+
+
+
+
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 Route::get('/', [JobController::class, 'home'])->name('home');
 Route::get('/categories', [JobController::class, 'categories'])->name('categories');
