@@ -55,6 +55,7 @@ class FirebaseUserController extends Controller
         return redirect()->route('firebase.index');
     }
 
+    
     public function createDummyInterests()
     {
         $interests = [
