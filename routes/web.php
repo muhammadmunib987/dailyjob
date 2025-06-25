@@ -19,7 +19,7 @@ Route::get('/search-jobs/{id?}/{type?}', [JobController::class, 'searchJobs'])->
 Route::get('/find-jobs', [JobController::class, 'searchJobs'])->name('job.search');
 Route::get('/blogs', [FrontEndController::class, 'blogs'])->name('blogs');
 Route::get('/blog-detail/{slug}', [FrontEndController::class, 'blogDetail'])->name('blog.detail');
-
+ 
 
 
 Route::get('/contact-us', [ContactController::class, 'contactUs'])->name('contact-us');
