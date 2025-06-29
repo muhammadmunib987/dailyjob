@@ -2,27 +2,35 @@ name: Deploy Laravel to cPanel
 
 on:
   push:
-    branches: [ main ]  # Triggers deployment when changes are pushed to main
+    branches:
+      - main
 
 jobs:
-  deploy:
+  ftp-deploy:
+    name: Upload via FTP
     runs-on: ubuntu-latest
-    
-    steps: 
-    - uses: actions/checkout@v3  # Fetches latest code from repository
-    
-    - name: Deploy to cPanel
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.CPANEL_HOST }}  # FTP host (can be domain or shared IP)
-        username: ${{ secrets.CPANEL_USERNAME }}  # cPanel username
-        password: ${{ secrets.CPANEL_PASSWORD }}  # cPanel password
-        server-dir: /home/brigpksi/consultantpanels.allahhootravels.co.uk/demo/  # Destination folder
-        exclude: |
-          **/.git*
-          **/.git*/**
-          .env.example
-          README.md
-          phpunit.xml
 
-          dVGO+JIQ~100%9nn-rKj4p1
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Upload to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_TARGET }}/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/vendor/**
+            .env
+            README.md
+            tests/
