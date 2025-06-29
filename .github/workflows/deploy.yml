@@ -7,7 +7,7 @@ on:
 
 jobs: 
   ftp-deploy:
-    name: Upload and Set Up Laravel
+    name: Upload via FTP
     runs-on: ubuntu-latest
 
     steps:
@@ -36,17 +36,3 @@ jobs:
             .env
             README.md
             tests/
-
-      - name: Run Laravel Commands on Server (via SSH)
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd public_html/dailyjobs
-            composer install --no-dev --prefer-dist --no-interaction
-            php artisan config:clear
-            php artisan config:cache
-            php artisan cache:clear
-            php artisan migrate --force
