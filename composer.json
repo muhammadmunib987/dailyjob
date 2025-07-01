@@ -13,7 +13,8 @@
         "anhskohbo/no-captcha": "^3.7",
         "laravel/framework": "^11.31",
         "laravel/socialite": "*",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "munib/user-profile": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -63,6 +64,12 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+        "type": "path",
+        "url": "packages/munib/user-profile"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

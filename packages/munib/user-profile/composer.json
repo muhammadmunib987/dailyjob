@@ -1,0 +1,18 @@
+{
+  "name": "munib/user-profile",
+  "description": "User profile view package",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Munib\\UserProfile\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Munib\\UserProfile\\UserProfileServiceProvider"
+      ]
+    }
+  },
+  "require": {}
+}

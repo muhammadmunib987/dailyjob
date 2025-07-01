@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0aa943fc2f9d19402cc1bd1686d9a7ab",
+    "content-hash": "b38150d5d1411c5ae9e42b51aa8c999b",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -2383,6 +2383,32 @@
                 }
             ],
             "time": "2024-12-05T17:15:07+00:00"
+        },
+        {
+            "name": "munib/user-profile",
+            "version": "dev-munib_dev",
+            "dist": {
+                "type": "path",
+                "url": "packages/munib/user-profile",
+                "reference": "76a82386eef887faca6eaee2b4c2a77f57337a51"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Munib\\UserProfile\\UserProfileServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Munib\\UserProfile\\": "src/"
+                }
+            },
+            "description": "User profile view package",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "nesbot/carbon",
@@ -8641,7 +8667,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "munib/user-profile": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
