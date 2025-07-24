@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\ChatController;
 
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 Route::get('/', [JobController::class, 'home'])->name('home');
@@ -57,3 +58,9 @@ Route::get('auth/google/callback', function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+Route::get('/chat', [ChatController::class, 'index']);
+Route::get('/send-message', [ChatController::class, 'sendMessage'])->name('send-message');
+
